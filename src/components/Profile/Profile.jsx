@@ -1,19 +1,18 @@
 import React from 'react';
 import Personal_info from './Personal_info/Personal_info';
-import Post_area from './Post_area/Post_area';
 import MyPosts from './MyPosts/MyPosts';
+import Post_area_container from './Post_area/Post_area_container';
 
 // First iteration
 
 const Profile = (props) => {
+let state = props.store.getState();
+
   return (
     <div>
       <Personal_info />
-      <Post_area
-        dispatch={props.dispatch}
-        newPostText={props.profilePage.newPostText}
-      />
-      <MyPosts posts={props.profilePage.posts} />
+      <Post_area_container store={props.store} />
+      <MyPosts store={props.store} posts={state.profilePage.posts} />
     </div>
   );
 };

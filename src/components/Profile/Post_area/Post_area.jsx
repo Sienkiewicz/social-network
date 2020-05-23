@@ -1,20 +1,16 @@
 import React from 'react';
 import s from './Post_area.module.scss';
-import {
-  addPostActionCreator,
-  updateNewPostActionCreator,
-} from '../../../redux/profile-reducer';
 
 const Post_area = (props) => {
   let newPostElement = React.createRef();
 
-  let addPost = () => {
-    props.dispatch(addPostActionCreator());
+  let onAddPost = () => {
+	  props.addPost();
   };
 
   let onPostChange = () => {
-    let text = newPostElement.current.value;
-    props.dispatch(updateNewPostActionCreator(text));
+	 let text = newPostElement.current.value;
+    props.updateNewPostText(text);
   };
 
   return (
@@ -27,7 +23,7 @@ const Post_area = (props) => {
         onChange={onPostChange}
         value={props.newPostText}
       />
-      <button onClick={addPost} className={s.btn}>
+      <button onClick={onAddPost} className={s.btn}>
         Send
       </button>
     </div>
