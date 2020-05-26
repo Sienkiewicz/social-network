@@ -4,27 +4,27 @@ import {
   updateNewPostActionCreator,
 } from '../../../redux/profile-reducer';
 import Post_area from './Post_area';
+import { connect } from 'react-redux';
 
-const Post_area_container = (props) => {
-let state = props.store.getState();
-
-//   let onAddPost = () => {
-//     props.dispatch(addPostActionCreator());
-//   };
-
-  let onPostChange = (text) => {
-    props.store.dispatch(updateNewPostActionCreator(text));
+let mapStateToProps = (state) => {
+  return {
+    newPostText: state.profilePage.newPostText,
   };
-
-  return (
-    <Post_area
-      updateNewPostText={onPostChange}
-      addPost={() => {
-        props.store.dispatch(addPostActionCreator());
-      }}
-      newPostText={state.profilePage.newPostText}
-    />
-  );
 };
 
+let mapDispatchToProps = (dispatch) => {
+  return {
+    updateNewPostText: (text) => {
+      dispatch(updateNewPostActionCreator(text));
+    },
+    addPost: () => {
+      dispatch(addPostActionCreator());
+    },
+  };
+};
+
+const Post_area_container = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Post_area);
 export default Post_area_container;

@@ -12,11 +12,11 @@ const Messages = (props) => {
 	let state = props.data;
   // 2-я итерация - превращаем фукцию DialogItem в мапированный массив, чтобы не дублировать код а мапировать один код, вне зависимости от количества входящих данных (в нашем случае от количества объектов в массиве)
   let dialogsElements = state.dialogs.map((d) => (
-    <DialogItem name={d.name} id={d.id} imgUrl={d.imgUrl} />
+    <DialogItem name={d.name} key={d.id} id={d.id} imgUrl={d.imgUrl} />
   ));
 
   let messagesElements = state.messages.map((m) => (
-    <Message message={m.message} id={m.id} />
+    <Message message={m.message} key={m.id} id={m.id} />
   ));
 
   let onAddMessage = () => {

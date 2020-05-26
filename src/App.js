@@ -11,11 +11,12 @@ import Settings from './components/Settings/Settings';
 import Navbar from './components/Navbar/Navbar';
 import Sidebar from './components/Sidebar/Sidebar';
 import MessagesContainer from './components/Messages/MessagesContainer';
+import UsersContainer from './components/Users/UsersContainer';
 
 
 
 
-function App(props) {
+function App() {
 
 
 
@@ -34,12 +35,9 @@ function App(props) {
 						<Route path='/news' component={News} />
 						<Route path='/settings' component={Settings} />
 						<Route path='/music' component={Music} /> */}
-						<Route path='/profile' render={() => <Profile
-							store={props.store}
-						/>} />
-						<Route path='/messages' render={() => <MessagesContainer
-							store={props.store}
-						/>} />
+						<Route path='/profile' render={() => <Profile />} />
+						<Route path='/messages' render={() => <MessagesContainer />} />
+						<Route path='/users' render={() => <UsersContainer />} />
 						<Route path='/news' render={() => <News />} />
 						<Route path='/settings' render={() => <Settings />} />
 						<Route path='/music' render={() => <Music />} />
