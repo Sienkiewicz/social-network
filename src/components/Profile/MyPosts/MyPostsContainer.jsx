@@ -1,5 +1,4 @@
 import React from 'react';
-import Post from './Post/Post';
 import { connect } from 'react-redux';
 import MyPosts from './MyPosts';
 

@@ -1,7 +1,12 @@
 import React from 'react';
 import s from './Personal_info.module.scss';
+import Preloader from '../../common/preloader/Preloader';
 
-const Personal_info = () => {
+const Personal_info = (props) => {
+  if (!props.profile) {
+    return <Preloader />;
+  }
+
   return (
     <div>
       <img
@@ -9,21 +14,19 @@ const Personal_info = () => {
         alt=''
       />
       <div className={s.persinfo}>
-        <img
-          className={s.awatar}
-          src='https://filestore.community.support.microsoft.com/api/profileimages/1a0b9821-ae11-4c60-9d46-628071c18aa2'
-          alt=''
-        />
+        <img className={s.awatar} src={props.profile.photos.large} />
         <div>
-          <h1>Piotr S</h1>
+          <h1> {props.profile.fullName} </h1>
           <ul>
-            <li className={s.item}>Date of Birth: 2 januaty</li>
+            <li className={s.item}>
+              Запрос: {props.profile.lookingForAJobDescription}
+            </li>
             <li>City: Wroclaw</li>
             <li>Education: UkrDLTU</li>
             <li>
-              Web Site:{' '}
-              <a target='blank' href='https://fotosienkiewicz.com/'>
-                fotosienkiewicz.com
+              Instagram:{' '}
+              <a target='blank' href={props.profile.contacts.instagram}>
+                {props.profile.contacts.instagram}
               </a>
               /
             </li>

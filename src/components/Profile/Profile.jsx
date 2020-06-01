@@ -5,10 +5,10 @@ import MyPostsContainer from './MyPosts/MyPostsContainer';
 
 // First iteration
 
-const Profile = () => {
+const Profile = (props) => {
   return (
     <div>
-      <Personal_info />
+      <Personal_info profile={props.profile} />
       <Post_area_container />
       <MyPostsContainer />
     </div>

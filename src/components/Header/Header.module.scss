@@ -1,0 +1,23 @@
+header {
+  display: flex;
+  background-color: green;
+  padding-top: 5px;
+  height: 70px;
+  padding: 5px 5px;
+  text-align: right;
+  justify-content: space-between;
+  align-items: center;
+
+  & img {
+    max-height: 100%;
+    color: white;
+  }
+
+  .loginBlock {
+	 cursor: pointer;
+	 
+    a {
+      color: white;
+    }
+  }
+}
