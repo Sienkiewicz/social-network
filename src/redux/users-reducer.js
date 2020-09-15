@@ -1,4 +1,5 @@
 import { usersAPI } from "../api/api";
+import { updateObjInArray } from "../utils/object-helpers";
 
 const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW';
@@ -8,38 +9,27 @@ const SET_TOTAL_USERS_COUNT = 'SET_TOTAL_USERS_COUNT';
 const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING';
 const TOGGLE_IS_FOLLOWING_PROGRESS = 'TOGGLE_IS_FOLLOWING_PROGRESS';
 
-
-
 let initialState = {
 	users: [],
-	pageSize: 100,
+	pageSize: 10,
 	totalUsersCount: 0,
-	currentPage: 3,
+	currentPage: 1,
 	isFetching: false,
 	followingInProgress: []
 }
+
 
 const usersReducer = (state = initialState, action) => {
 	switch (action.type) {
 		case FOLLOW:
 			return {
 				...state,
-				users: state.users.map(u => {
-					if (u.id === action.userId) {
-						return { ...u, followed: true }
-					}
-					return u;
-				})
+				users: updateObjInArray(state.users, 'id', action.userId, { followed: true })
 			};
 		case UNFOLLOW:
 			return {
 				...state,
-				users: state.users.map(u => {
-					if (u.id === action.userId) {
-						return { ...u, followed: false }
-					}
-					return u;
-				})
+				users: updateObjInArray(state.users, 'id', action.userId, { followed: false })	
 			};
 		case SET_USERS:
 			return {
@@ -86,40 +76,38 @@ export const toggleFollowingProgress = (isFetching, userId) => ({ type: TOGGLE_I
 //? THUNK CREATORS
 
 export const getUsers = (currentPage, pageSize) => {
-	return (dispatch) => {
+	return async (dispatch) => {
 		dispatch(setCurrentPage(currentPage));
 		dispatch(toggleIsFetching(true));
 
-		usersAPI.getUsers(currentPage, pageSize).then((data) => {
-			//? response это просто слово, может быть все что угодно
-			dispatch(toggleIsFetching(false));
-			dispatch(setUsers(data.items)); //* адрес нашли, когда вызвали дебаггер строчкой выше и посмотрели что пришло в response
-			dispatch(setTotalUsersCount(data.totalCount));
-		});
+		const data = await usersAPI.getUsers(currentPage, pageSize);
+		
+		dispatch(toggleIsFetching(false));
+		dispatch(setUsers(data.items)); //* адрес нашли, когда вызвали дебаггер строчкой выше и посмотрели что пришло в response
+		dispatch(setTotalUsersCount(data.totalCount));
 	}
 }
 
+const followUnfollowFlow = async (dispatch, userId, apiMethod, actionCreator) => {
+	dispatch(toggleFollowingProgress(true, userId));
+	const data = await apiMethod;
+	if (data.resultCode === 0) {
+		dispatch(actionCreator(userId));
+	}
+	dispatch(toggleFollowingProgress(false, userId));
+}
+
 export const unfollow = (userId) => {
-	return (dispatch) => {
-		dispatch(toggleFollowingProgress(true, userId));
-		usersAPI.unfollow(userId).then((data) => {
-			if (data.resultCode === 0) {
-				dispatch(unfollowSuccess(userId));
-			}
-			dispatch(toggleFollowingProgress(false, userId));
-		});
+	return async (dispatch) => {
+
+		followUnfollowFlow(dispatch, userId, usersAPI.unfollow(userId), unfollowSuccess)
 	}
 }
 
 export const follow = (userId) => {
-	return (dispatch) => {
-		dispatch(toggleFollowingProgress(true, userId));
-		usersAPI.follow(userId).then((data) => {
-			if (data.resultCode === 0) {
-				dispatch(followSuccess(userId));
-			}
-			dispatch(toggleFollowingProgress(false, userId));
-		});
+	return async (dispatch) => {
+
+		followUnfollowFlow(dispatch, userId, usersAPI.follow(userId), followSuccess)
 	}
 }
 

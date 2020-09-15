@@ -5,7 +5,7 @@ const MyPosts = (props) => {
   // Second iteration with map
 
   let postsElement = props.posts.map((p) => (
-    <Post count={p.count} message={p.post} />
+    <Post key={p.id} count={p.count} message={p.post} />
   ));
 
   return <div>{postsElement}</div>;

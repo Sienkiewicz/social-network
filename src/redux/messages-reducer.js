@@ -1,6 +1,6 @@
 const ADD_MESSAGE = 'ADD-MESSAGE';
 
-let iniitialState = {
+let initialState = {
 	messages: [
 		{ id: '1', message: 'Hi' },
 		{ id: '2', message: 'How is your learning?' },
@@ -19,7 +19,7 @@ let iniitialState = {
 	]
 }
 
-const messagesReducer = (state = iniitialState, action) => {
+const messagesReducer = (state = initialState, action) => {
 	switch (action.type) {
 		case ADD_MESSAGE:
 			return {
@@ -33,6 +33,7 @@ const messagesReducer = (state = iniitialState, action) => {
 			return state;
 	}
 }
+
 
 export const addMessageActionCreator = (textOfNewMessage) => ({ type: ADD_MESSAGE, textOfNewMessage });
 

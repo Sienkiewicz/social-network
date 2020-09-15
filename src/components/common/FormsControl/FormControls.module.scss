@@ -1,9 +1,34 @@
+.container {
+	padding-top: 20px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	background-color: #fff;
+	text-align: center;
+}
 
-  .error {
-    border: 1px solid red;
-  }
+.error {
+  border: 1px solid red;
+}
 
 .formSummeryError {
-	padding: 5px;
-	color: red;
+  padding: 5px;
+  color: red;
+}
+
+.field {
+  margin-bottom: 10px;
+  width: 150px;
+  line-height: 1.5;
+  margin-left: 5px;
+}
+
+.rememberMe {
+  margin: 5px;
+}
+
+button {
+	text-align: center;
+	padding: 0;
+	text-align-last: center;
 }

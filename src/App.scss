@@ -1,8 +1,15 @@
+@mixin mq($from) {
+  @media (max-width: $from) {
+    @content;
+  }
+}
 
+body {
+  background: #f2f2f2;
+}
 .app-wrapper {
   max-width: 900px;
   margin: 0 auto;
-  display: grid;
 }
 
 .container {
@@ -10,17 +17,32 @@
   margin-top: 10px;
 
   .sidebar {
-    flex: 0 1 22%;
-    background: rgba(60, 165, 139, 0.719);
+    width: 200px;
+    background: #009999;
+	 transition: 1s;
+	 
+
+    @include mq('900px') {
+		position: absolute;
+		transform: translateX(-300px);
+		z-index: 2;
+		height: 100%;
+    }
+  }
+
+  .openSidebar {
+    @include mq('900px') {
+      transform: translateX(0px);
+      transition: 1s;
+    }
   }
 
   .content {
     margin-left: 10px;
-    flex: 1 1 78%;
+    width: 100%;
 
     img {
       max-width: 100%;
-      // margin-bottom: 20px;
     }
   }
 }
@@ -31,12 +53,12 @@ h2 {
 }
 
 textarea {
-	margin: 0 auto;
+  margin: 0 auto;
   font-size: 1.2rem;
   width: 100%;
   max-width: 90%;
   height: 100px;
-  border: 1px solid green;
+  border: 1px solid #009999;
   margin-top: 10px;
   background: rgb(226, 226, 226);
 
@@ -47,7 +69,7 @@ textarea {
 }
 
 button {
-	  background-color: grey;
+  background-color: grey;
   margin-top: 10px;
   align-self: flex-end;
   right: 100px;
@@ -57,4 +79,28 @@ button {
   text-align-last: right;
   padding-right: 20px;
   color: #fff;
+}
+
+.preloader {
+  position: fixed; /* Sit on top of the page content */
+  display: flex; /* Hidden by default */
+  width: 100%; /* Full width (cover the whole page) */
+  height: 100%; /* Full height (cover the whole page) */
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(
+    255,
+    255,
+    255,
+    0.8
+  ); /* Black background with opacity */
+  z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
+  justify-content: center;
+  align-items: center;
+
+  img {
+    width: 20%;
+  }
 }

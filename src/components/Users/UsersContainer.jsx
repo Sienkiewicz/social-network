@@ -11,6 +11,7 @@ import {
 import Users from './Users';
 import Preloader from '../common/preloader/Preloader';
 
+
 class UsersAPIComponent extends React.Component {
   componentDidMount() {
     this.props.getUsers(this.props.currentPage, this.props.pageSize);

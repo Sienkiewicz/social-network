@@ -2,49 +2,73 @@ import React from 'react';
 import Profile from './Profile';
 import { connect } from 'react-redux';
 import {
-  getUserProfile,
-  getUserStatus,
-  updateUserStatus,
+	getUserProfile,
+	getUserStatus,
+	updateUserStatus,
 } from '../../redux/profile-reducer';
 import { withRouter, Redirect } from 'react-router-dom';
 import { compose } from 'redux';
-import { withAuthRedirect } from '../hoc/withAuthRedirect';
+import MyPostsContainer from './MyPosts/MyPostsContainer';
+import Preloader from '../common/preloader/Preloader';
+import PostArea from './PostArea/PostArea';
 
 // First iteration
 
 class ProfileContainer extends React.Component {
-  componentDidMount() {
-    let userId = this.props.match.params.userId;
-    if (!userId) {
-		userId = this.props.ownId;
-    }
-    this.props.getUserProfile(userId);
-    this.props.getUserStatus(userId);
-  }
+	refreshProfile() {
+		let userId = this.props.match.params.userId;
+		if (!userId) {
+			userId = this.props.authId;
+		}
+		this.props.getUserProfile(userId);
+		this.props.getUserStatus(userId);
+	}
+	
+	componentDidMount() {
+		this.refreshProfile();
+	}
 
-  render() {
-	  let userId = this.props.match.params.userId;
-	  if(!userId){
-		return <Redirect to={'/login'} />
-	  }
+	componentDidUpdate(prevProps, prevState, snapshot) {
+		if (this.props.match.params.userId !== prevProps.match.params.userId) {
+			this.refreshProfile();
+		}
+	}
 
-    return (
-      <div>
-        <Profile
-          {...this.props}
-          profile={this.props.profile}
-          status={this.props.status}
-          updateUserStatus={this.props.updateUserStatus}
-        />
-      </div>
-    );
-  }
+	render() {
+
+		if (!this.props.isAuth) {
+			let userId = this.props.match.params.userId;
+			if (!userId) {
+				return <Redirect to={'/login'} />
+			}
+		}
+
+		return (
+			<>
+				{this.props.isFetching ? <Preloader /> : null}
+				<Profile
+					{...this.props}
+					profile={this.props.profile}
+					status={this.props.status}
+					updateUserStatus={this.props.updateUserStatus}
+					userId={this.props.match.params.userId}
+				/>
+				{!this.props.match.params.userId &&
+					<PostArea />
+				}
+				<MyPostsContainer />
+
+			</>
+		);
+	}
 }
 
 let mapStateToProps = (state) => ({
-  profile: state.profilePage.profile,
-  ownId: state.auth.id,
-  status: state.profilePage.status,
+	isFetching: state.profilePage.isFetching,
+	profile: state.profilePage.profile,
+	authId: state.auth.id,
+	status: state.profilePage.status,
+	isAuth: state.auth.isAuth,
 });
 
 // let withUrlDataContainerComponent = withRouter(ProfileContainer);
@@ -54,6 +78,6 @@ let mapStateToProps = (state) => ({
 // );
 
 export default compose(
-  connect(mapStateToProps, { getUserProfile, getUserStatus, updateUserStatus }),
-  withRouter,
+	connect(mapStateToProps, { getUserProfile, getUserStatus, updateUserStatus }),
+	withRouter,
 )(ProfileContainer);

@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-pascal-case */
-import React from 'react';
+import React, { useEffect, useState, Suspense } from 'react';
 import './Scss/nullstyle.scss';
 import './App.scss';
 import { Route } from 'react-router-dom';
@@ -8,61 +8,58 @@ import Music from './components/Music/Music';
 import Settings from './components/Settings/Settings';
 import Navbar from './components/Navbar/Navbar';
 import Sidebar from './components/Sidebar/Sidebar';
-import MessagesContainer from './components/Messages/MessagesContainer';
-import UsersContainer from './components/Users/UsersContainer';
-import ProfileContainer from './components/Profile/ProfileContainer';
 import HeaderContainer from './components/Header/HeaderContainer';
 import Login from './components/Login/Login';
-import { connect } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { initializeApp } from './redux//app-reducer';
 import Preloader from './components/common/preloader/Preloader';
 
+const UsersContainer = React.lazy(() => import('./components/Users/UsersContainer'));
+const ProfileContainer = React.lazy(() => import('./components/Profile/ProfileContainer'));
+const Messages = React.lazy(() => import('./components/Messages/Messages'));
 
+const App = () => {
+	const [openSidebar, setOpenSidebar] = useState(false)
+	const initialized = useSelector(state => state.app.initialized);
+	const dispatch = useDispatch()
 
-class App extends React.Component {
+	useEffect(() => {
+		dispatch(initializeApp());
+	}, [])
 
-	componentDidMount() {
-		this.props.initializeApp();
+	if (!initialized) {
+		return <Preloader />
 	}
 
-	render() {
-
-		if(!this.props.initialized) {
-			return <Preloader />
-		}
-
-		return (
-			<div className="app-wrapper">
-				<HeaderContainer />
-				<div className="container">
-					<div className='sidebar'>
-						<Navbar />
-						<Sidebar />
-					</div>
-					<div className="content">
-						{/* <Route path='/profile' component= {Profile}/> */}
-						{/* <Route path='/messages' component={Messages} />
-						<Route path='/news' component={News} />
-						<Route path='/settings' component={Settings} />
-						<Route path='/music' component={Music} /> */}
+	return (
+		<div className="app-wrapper" >
+			<HeaderContainer
+				openSidebar={openSidebar}
+				setOpenSidebar={setOpenSidebar} />
+			<div className='container'>
+				<div className={openSidebar ? 'sidebar openSidebar' : 'sidebar'} >
+					<Navbar
+						openSidebar={openSidebar}
+						setOpenSidebar={setOpenSidebar}
+					/>
+					<Sidebar />
+				</div>
+				<div className="content">
+					<Suspense fallback={<Preloader />}>
 						<Route path='/profile/:userId?' render={() => <ProfileContainer />} />
-						<Route path='/messages' render={() => <MessagesContainer />} />
+						<Route path='/messages' render={() => <Messages />} />
 						<Route path='/users' render={() => <UsersContainer />} />
-						<Route path='/news' render={() => <News />} />
-						<Route path='/settings' render={() => <Settings />} />
-						<Route path='/music' render={() => <Music />} />
-						<Route path='/login' render={() => <Login />} />
-					</div>
+					</Suspense>
+					<Route path='/news' render={() => <News />} />
+					<Route path='/settings' render={() => <Settings />} />
+					<Route path='/music' render={() => <Music />} />
+					<Route path='/login' render={() => <Login />} />
 				</div>
 			</div>
-		);
-	}
+		</div>
+	);
 }
 
-const mapStateToProps = (state) => ({
-	initialized: state.app.initialized
-})
-
-export default connect(mapStateToProps, { initializeApp })(App);
+export default App;
 
 

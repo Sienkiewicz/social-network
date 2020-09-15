@@ -1,20 +1,19 @@
-
-
 .dialogs {
   display: grid;
   grid-template-columns: 1fr 3fr;
 }
 
 .dialogsItems {
-  border-right: 1px solid red;
+  border-right: 1px solid #009999;
 
   li {
-    display: flex;
+    display: block;
     font-size: 25px;
     padding: 10px 5px;
     align-items: center;
 
     & > div {
+      display: inline-block;
       img {
         width: 40px;
         height: 40px;
@@ -23,17 +22,19 @@
     }
 
     a {
+      display: inline-block;
       padding-left: 10px;
       color: darkslategrey;
     }
 
     .active {
-      color: red;
-      margin-left: 40px;
-		padding: 0px 10px;
-		padding-bottom: 5px;
-      border-top: 1px solid green;
-      border-bottom: 1px solid green;
+      color: #009999;
+      padding: 0px 10px;
+      padding-bottom: 5px;
+      border-top: 1px solid #009999;
+      border-bottom: 1px solid #009999;
+      float: right;
+      line-height: 1.7rem;
     }
   }
 }
@@ -51,6 +52,6 @@
 }
 
 .message {
-	font-size: 1.2rem;
-	margin-top: 10px;
+  font-size: 1.2rem;
+  margin-top: 10px;
 }

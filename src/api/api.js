@@ -9,27 +9,26 @@ const instance = Axios.create({
 })
 
 export const usersAPI = {
-	getUsers(currentPage = 1, pageSize = 10) {
+	async getUsers(currentPage = 1, pageSize = 10) {
 
-		return instance.get(
-			`users?page=${ currentPage }&count=${ pageSize }`)
-			.then(response => response.data) //* это одно и тоже что написать 
-		//* (responce => {return response.data;})
-
+		const response = await instance.get(
+			`users?page=${ currentPage }&count=${ pageSize }`);
+		return response.data;
+		
 	},
 
-	follow(userId) {
-		return instance.post(
+	async follow(userId) {
+		const response = await instance.post(
 			`follow/${ userId }`,
-			{},
-		).then(response => response.data);
+			{});
+		return response.data;
 	},
 
-	unfollow(userId) {
-		return instance.delete(
+	async unfollow(userId) {
+		const response = await instance.delete(
 			`follow/${ userId }`,
-			{},
-		).then(response => response.data);
+			{});
+		return response.data;
 	},
 
 	getProfile(userId) {

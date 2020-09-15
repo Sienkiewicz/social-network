@@ -1,6 +1,6 @@
 header {
   display: flex;
-  background-color: green;
+  background-color: #009999;
   padding-top: 5px;
   height: 70px;
   padding: 5px 5px;
@@ -10,14 +10,27 @@ header {
 
   & img {
     max-height: 100%;
-    color: white;
+    filter: invert(100%);
+
+    &:hover {
+      @media only screen and (max-width: 900px) {
+        filter: invert(70%);
+        cursor: pointer;
+      }
+    }
   }
 
   .loginBlock {
 	 cursor: pointer;
-	 
+	 text-align: center;
+
     a {
       color: white;
     }
+  }
+
+  button {
+    background: none;
+    width: 100%;
   }
 }

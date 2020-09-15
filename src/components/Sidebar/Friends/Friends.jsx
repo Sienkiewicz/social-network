@@ -25,7 +25,7 @@ const Friends = (props) => {
   ];
 
   let usersEl = users.map((user) => (
-    <AvatarItem name={user.name} id={user.id} imgUrl={user.imgUrl} />
+	  <AvatarItem name={user.name} key={user.id} id={user.id} imgUrl={user.imgUrl} />
   ));
 
   return (

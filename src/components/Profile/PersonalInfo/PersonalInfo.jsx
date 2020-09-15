@@ -1,26 +1,22 @@
 import React from 'react';
-import s from './Personal_info.module.scss';
+import s from './PersonalInfo.module.scss';
 import Preloader from '../../common/preloader/Preloader';
 import userPhoto from '../../../assets/icons/icon_developer.jpg'
 
-const Personal_info = (props) => {
+const PersonalInfo = (props) => {
   if (!props.profile) {
     return <Preloader />;
   }
 
   return (
     <div>
-      <img
-        src='https://cdn.naturettl.com/wp-content/uploads/2015/05/22015021/featured3.jpg'
-        alt=''
-      />
       <div className={s.persinfo}>
-        <img className={s.awatar} src={props.profile.photos.large || userPhoto} />
+        <img className={s.awatar} src={props.profile.photos.large || userPhoto} alt='' />
         <div>
           <h1> {props.profile.fullName} </h1>
           <ul>
             <li className={s.item}>
-              Запрос: {props.profile.lookingForAJobDescription}
+              Looking for a job? {props.profile.lookingForAJobDescription}
             </li>
             <li>City: Wroclaw</li>
             <li>Education: UkrDLTU</li>
@@ -38,4 +34,4 @@ const Personal_info = (props) => {
   );
 };
 
-export default Personal_info;
+export default PersonalInfo;

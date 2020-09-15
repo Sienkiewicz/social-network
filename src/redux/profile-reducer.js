@@ -1,8 +1,9 @@
-import { usersAPI, profileAPI } from "../api/api";
+import { profileAPI } from "../api/api";
 
 const ADD_POST = 'ADD-POST';
 const SET_USER_PROFILE = 'SET_USER_PROFILE';
 const SET_USER_STATUS = 'SET_USER_STATUS';
+const TOGGLE_FETCHING = 'TOGGLE_FETCHING';
 
 let initialState = {
 	posts: [
@@ -20,6 +21,7 @@ let initialState = {
 	],
 	profile: null,
 	status: '',
+	isFetching: false,
 }
 
 const profileReducer = (state = initialState, action) => {
@@ -47,6 +49,12 @@ const profileReducer = (state = initialState, action) => {
 			};
 		}
 
+		case TOGGLE_FETCHING: {
+			return {
+				...state, isFetching: action.isFetching
+			};
+		}
+
 		default:
 			return state;
 	}
@@ -55,36 +63,27 @@ const profileReducer = (state = initialState, action) => {
 export const addPostActionCreator = (textOfNewPost) => ({ type: ADD_POST, textOfNewPost });
 export const setUserProfile = (profile) => ({ type: SET_USER_PROFILE, profile });
 export const setUserStatus = (status) => ({ type: SET_USER_STATUS, status });
+export const toggleFetching = (isFetching) => ({ type: TOGGLE_FETCHING, isFetching });
 
 
-export const getUserProfile = (userId) => (dispatch) => {
-	usersAPI.getProfile(userId).then(
-		(response) => {
-			dispatch(setUserProfile(response.data));
-		}
-	);
+export const getUserProfile = (userId) => async (dispatch) => {
+	// initialState.isFetching = true;
+	dispatch(toggleFetching(true));
+	const response = await profileAPI.getProfile(userId);
+	dispatch(toggleFetching(false));
+	dispatch(setUserProfile(response.data));
 }
 
-export const getUserStatus = (userId) => (dispatch) => {
-	profileAPI.getStatus(userId).then(
-		(response) => {
-			dispatch(setUserStatus(response.data));
-		}
-	);
+export const getUserStatus = (userId) => async (dispatch) => {
+	const response = await profileAPI.getStatus(userId);
+	dispatch(setUserStatus(response.data));
 }
 
-export const updateUserStatus = (status) => (dispatch) => {
-	profileAPI.updateStatus(status).then(
-		(response) => {
-			if (response.data.resultCode === 0) {
-				dispatch(setUserStatus(status));
-			}
-
-		}
-	);
+export const updateUserStatus = (status) => async (dispatch) => {
+	const response = await profileAPI.updateStatus(status);
+	if (response.data.resultCode === 0) {
+		dispatch(setUserStatus(status));
+	}
 }
-
-
-
 
 export default profileReducer;

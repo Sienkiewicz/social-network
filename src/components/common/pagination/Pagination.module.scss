@@ -1,0 +1,27 @@
+.selectedPage {
+  font-weight: bold;
+  font-size: 1.05em;
+  height: 25px;
+  line-height: 1.3;
+}
+
+.paginator {
+  margin: 20px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.countsPages {
+  border: 1px solid #009999;
+  padding: 0px 2px 0px 2px;
+  cursor: pointer;
+  margin: 0 1px;
+  display: inline-block;
+  width: 40px;
+  text-align: center;
+}
+
+.arrow {
+	cursor: pointer;
+}
