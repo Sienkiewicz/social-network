@@ -2,7 +2,7 @@ import React from 'react';
 import { reduxForm, Field } from 'redux-form';
 import { TextForm } from '../common/FormsControl/FormControls';
 import { required, maxLengthCreator } from '../../utils/validators/validators';
-import { connect } from 'react-redux';
+import { connect, useSelector } from 'react-redux';
 import { login } from '../../redux/auth-reducer';
 import { Redirect } from 'react-router-dom';
 import s from '../common/FormsControl/FormControls.module.scss';
@@ -10,6 +10,7 @@ import s from '../common/FormsControl/FormControls.module.scss';
 let maxLength30 = maxLengthCreator(30);
 
 const LoginForm = (props) => {
+	const captchaUrl = useSelector(state => state.auth.captchaUrl)
 	return (
 		<form
 			onSubmit={props.handleSubmit}
@@ -45,10 +46,21 @@ const LoginForm = (props) => {
 					/>
           remember me
         </div>
+			 {captchaUrl && <img src={captchaUrl} alt='captcha' />} 
+				{captchaUrl && <Field
+					placeholder={'Symbols from image'}
+					name={'captcha'}
+					type={'captcha'}
+					typeField='input'
+					component={TextForm}
+					validate={[required]}
+					className={s.rememberMe}
+				/>} 
 				{props.error && <div className={s.formSummeryError}>{props.error}</div>}
 				<div>
 					<button>Login</button>
 				</div>
+				
 			</div>
 		</form>
 	);
@@ -57,11 +69,13 @@ const LoginForm = (props) => {
 const LoginReduxForm = reduxForm({ form: 'login' })(LoginForm);
 
 const Login = (props) => {
+
+	const isAuth = useSelector(state => state.auth.isAuth)
 	const onSubmit = (formData) => {
-		props.login(formData.email, formData.password, formData.rememberMe);
+		props.login(formData.email, formData.password, formData.rememberMe, formData.captcha);
 	};
 
-	if (props.isAuth) {
+	if (isAuth) {
 		return <Redirect to={'/profile'} />;
 	}
 

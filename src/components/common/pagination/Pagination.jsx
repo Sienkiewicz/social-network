@@ -25,7 +25,7 @@ const Pagination = (props) => {
 
 	useEffect(() => {
 		dispatch(getUsers(count + 1, props.pageSize))
-	}, [count])
+	}, [count, dispatch, props.pageSize])
 	return (
 		<div className={s.paginator}>
 			{count >= 10 &&

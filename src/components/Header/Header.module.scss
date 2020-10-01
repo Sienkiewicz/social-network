@@ -2,7 +2,7 @@ header {
   display: flex;
   background-color: #009999;
   padding-top: 5px;
-  height: 70px;
+  height: 50px;
   padding: 5px 5px;
   text-align: right;
   justify-content: space-between;
@@ -21,16 +21,18 @@ header {
   }
 
   .loginBlock {
-	 cursor: pointer;
+    cursor: pointer;
 	 text-align: center;
-
-    a {
-      color: white;
-    }
   }
 
-  button {
+  .button {
+	  margin-top: 0;
     background: none;
-    width: 100%;
+	 width: 100%;
+	 font-size: 1rem;
+	 font-weight: 500;
+	 &:hover {
+		 background: rgba(42, 53, 53, 0.5);
+	 }
   }
 }

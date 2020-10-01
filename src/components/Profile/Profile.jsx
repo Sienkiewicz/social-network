@@ -5,10 +5,19 @@ import PersonalInfo from './PersonalInfo/PersonalInfo';
 // First iteration
 
 const Profile = (props) => {
+	
 	return (
 		<div>
-			<PersonalInfo profile={props.profile} />
+			<PersonalInfo
+				userId={props.userId}
+				isAvatarFetching={props.isAvatarFetching}
+				savePhoto={props.savePhoto}
+				isEditMode={props.isEditMode}
+				profile={props.profile}
+				toggleEditMode={props.toggleEditMode}
+			/>
 			<ProfileStatus
+				authId={props.authId}
 				userId={props.userId}
 				status={props.status}
 				updateUserStatus={props.updateUserStatus}

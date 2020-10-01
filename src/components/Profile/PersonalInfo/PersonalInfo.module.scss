@@ -1,33 +1,191 @@
-.persinfo {
-	display: flex;
-	align-items: center;
-	justify-content: center;
+.persInfo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  @media only screen and (max-width: 600px) {
+    flex-direction: column;
+  }
 }
 
-.awatar {
-	width: 200px;
-	margin-top: 20px;
-	margin-right: 50px;
-	margin-bottom: 20px;
-	border-radius: 50%;
+.avatar {
+  margin-top: 20px;
+  margin-right: 50px;
+  margin-bottom: 20px;
+  width: 200px;
+  border-radius: 50%;
+  overflow: hidden;
+  position: relative;
+  border: 4px solid white;
 
-	@media only screen and (max-width: 600px) {
-		width: 100px;
-	} 
+  &:hover {
+    .input {
+      height: 50%;
+      transition: 1s;
+    }
+    color: white;
+  }
+
+  img {
+    width: 100%;
+
+    cursor: pointer;
+  }
+
+  .input {
+    background: rgba(0, 0, 0, 0.5);
+    position: absolute;
+    height: 0%;
+    width: 100%;
+    bottom: 0;
+    transition: 1s;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    input {
+      display: none;
+    }
+  }
+
+  @media only screen and (max-width: 600px) {
+    width: 200px;
+    margin-right: 0;
+  }
 }
 
-h1 {
-	font-size: 30px;
-	margin-bottom: 30px;
-	color: #009999;
-	font-weight: bold;
+.containerInfo {
+  display: flex;
+  flex-direction: column;
+  width: 30%;
+
+  @media only screen and (max-width: 600px) {
+    width: 100%;
+    text-align: center;
+  }
+
+  h2 {
+    font-size: 25px;
+    margin-bottom: 30px;
+    color: #009999;
+    font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+
+    @media only screen and (max-width: 600px) {
+      justify-content: center;
+    }
+
+    & > div {
+      @media only screen and (max-width: 600px) {
+        display: none;
+      }
+    }
+  }
+
+  li {
+    margin-bottom: 10px;
+    font-size: 16px;
+  }
+
+  .item {
+    font-weight: bold;
+    color: rgb(121, 120, 120);
+  }
+
+  .settings {
+    cursor: pointer;
+    :hover {
+      color: rgba(25, 80, 80, 0.5);
+    }
+  }
 }
 
-li {
-	margin-bottom: 10px;
-	font-size: 16px;
+.overlaySettingsField {
+  height: 50%;
+  width: 40%;
+  position: fixed;
+  color: white;
+  z-index: 1;
+  top: 25%;
+  left: 30%;
+  background-color: rgba(0, 0, 0, 0.7);
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding: 10px 10px 20px 10px;
+  border: 5px solid darkslategrey;
+
+  @media only screen and (max-width: 1000px) {
+    width: 70%;
+    top: 5%;
+    left: 15%;
+    height: 100%;
+    padding-bottom: 70px;
+  }
+
+  @media only screen and (max-width: 600px) {
+    width: 100%;
+    top: 0;
+    left: 0;
+    height: 100%;
+  }
+
+  .closeTabContainer {
+    float: right;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &:hover {
+      background: rgba(226, 226, 226, 0.2);
+    }
+  }
+
+  .overlayContent {
+    position: relative;
+    width: 100%;
+    text-align: center;
+    margin-top: 30px;
+
+    & > div {
+      padding: 10px 0;
+      display: flex;
+      flex-direction: column;
+      margin-right: 20px;
+      margin-left: 20px;
+
+      label {
+        margin-bottom: 10px;
+      }
+
+      input {
+        width: 100%;
+        align-self: center;
+        text-align: center;
+      }
+    }
+  }
 }
 
-.item {
-	font-weight: bold;
+.socLinks {
+  display: flex;
+  justify-content: center;
+
+  & div {
+	  margin: 5px;
+  }
+
+  a {
+    color: black;
+
+    :hover {
+      color: rgba(25, 80, 80, 0.5);
+    }
+  }
 }

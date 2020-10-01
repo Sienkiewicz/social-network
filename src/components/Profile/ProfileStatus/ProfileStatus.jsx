@@ -34,22 +34,21 @@ class ProfileStatus extends React.Component {
 	};
 
 
-render() {
-	return (
-		<div className={s.container}>
-			{!this.state.editMode ? (
-				<div>
-					<span
-						className={s.status}
-						onDoubleClick={this.activateEditMode}
-					>
-						{' '}
-						{this.props.status || '#######'}
-					</span>
-				</div>
-			) : (
-					<div className={s.overlay}>
-						<div>
+	render() {
+		return (
+			<div className={s.container}>
+				{!this.state.editMode ? (
+					<div><b>Status:</b>
+						<span
+							className={s.status}
+							onDoubleClick={+this.props.userId === this.props.authId ? this.activateEditMode : () => { }}
+						>
+							{' '}
+							{this.props.status || '#######'}
+						</span>
+					</div>
+				) : (
+						<div className={s.overlay}>
 							<input
 								className={s.editStatus}
 								onChange={this.onStatusChange}
@@ -58,13 +57,10 @@ render() {
 								value={this.state.status}
 							/>
 						</div>
-					</div>
-				)}
-		</div>
-	);
+					)}
+			</div>
+		);
+	}
 }
-}
-
-
 
 export default ProfileStatus;

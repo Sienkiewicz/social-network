@@ -8,8 +8,45 @@ body {
   background: #f2f2f2;
 }
 .app-wrapper {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
   max-width: 900px;
   margin: 0 auto;
+  align-items: stretch;
+
+  .bottomNavBar {
+    display: none;
+    position: fixed;
+    //  height: 70px;
+    width: 100%;
+    background: #009999;
+    left: 0;
+    bottom: 0;
+    padding-right: 10px;
+    padding-left: 10px;
+    z-index: 2;
+
+    .bottomNavBar__iconSettings {
+      display: none;
+      height: 50px;
+      filter: invert(100%);
+
+      @include mq('600px') {
+        display: inline-block;
+      }
+    }
+
+    .bottomNavBar__iconBurger {
+      height: 50px;
+      float: right;
+      filter: invert(100%);
+    }
+
+    @include mq('900px') {
+      display: block;
+    }
+  }
 }
 
 .container {
@@ -19,14 +56,13 @@ body {
   .sidebar {
     width: 200px;
     background: #009999;
-	 transition: 1s;
-	 
+    transition: 1s;
 
     @include mq('900px') {
-		position: absolute;
-		transform: translateX(-300px);
-		z-index: 2;
-		height: 100%;
+      position: absolute;
+      transform: translateX(-300px);
+      z-index: 1;
+      height: 100%;
     }
   }
 
@@ -34,12 +70,19 @@ body {
     @include mq('900px') {
       transform: translateX(0px);
       transition: 1s;
+      width: 300px;
+    }
+
+    @include mq('400px') {
+      width: 100%;
     }
   }
 
   .content {
     margin-left: 10px;
-    width: 100%;
+    margin-right: 10px;
+    margin-bottom: 70px;
+	 width: 100%;
 
     img {
       max-width: 100%;

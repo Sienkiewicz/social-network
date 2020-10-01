@@ -1,17 +1,12 @@
 .container {
-	text-align: center;
-	margin: 20px;
+  text-align: center;
+  margin: 20px;
 }
 
 .status {
   color: #009999;
 }
 
-.editStatus {
-	margin: 28% 40%;
-  width: 300px;
-  height: 25px;
-}
 
 
 .overlay {
@@ -23,7 +18,16 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5); /* Black background with opacity */
-  z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
+  background-color: rgba(0, 0, 0, 0.8); /* Black background with opacity */
+  z-index: 1; /* Specify a stack order in case you're using a different order for other elements */
   cursor: pointer; /* Add a pointer on hover */
+
+  .editStatus {
+  width: 50%;
+  height: 25px;
+  position: absolute;
+  top: 30%;
+  left: 25%;
+  text-align: center;
+}
 }

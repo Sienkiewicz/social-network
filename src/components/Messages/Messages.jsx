@@ -7,8 +7,6 @@ import { addMessageActionCreator } from '../../redux/messages-reducer';
 import { withAuthRedirect } from '../hoc/withAuthRedirect';
 import { Formik, Field, Form } from 'formik';
 
-
-
 const SignupForm = () => {
 
 	const dispatch = useDispatch()
@@ -36,10 +34,6 @@ const Messages = () => {
 
 	const state = useSelector(state => state.messagesPage)
 
-	// const dispatch = useDispatch()
-
-	//   let state = props.data;
-	// 2-я итерация - превращаем фукцию DialogItem в мапированный массив, чтобы не дублировать код а мапировать один код, вне зависимости от количества входящих данных (в нашем случае от количества объектов в массиве)
 	let dialogsElements = state.dialogs.map((d) => (
 		<DialogItem name={d.name} key={d.id} id={d.id} imgUrl={d.imgUrl} />
 	));
@@ -48,20 +42,11 @@ const Messages = () => {
 		<Message message={m.message} key={m.id} id={m.id} />
 	));
 
-	//   let onSubmit = (value) => {
-	//     props.addMessage(value.textOfNewMessage);
-	//   };
-
-	// let onSubmit = value => {
-	// 	dispatch(addMessageActionCreator(value.textOfNewMessage));
-	// };
-
 	return (
 		<div className={s.dialogs}>
 			<ul className={s.dialogsItems}>{dialogsElements}</ul>
 			<div className={s.messages}>
 				{messagesElements}
-				{/* <AddMessageReduxForm onSubmit={onSubmit} /> */}
 				<div>
 					<SignupForm />
 				</div>

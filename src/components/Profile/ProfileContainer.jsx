@@ -1,12 +1,14 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Profile from './Profile';
-import { connect } from 'react-redux';
+import { connect, useDispatch } from 'react-redux';
 import {
 	getUserProfile,
 	getUserStatus,
 	updateUserStatus,
+	savePhoto,
+	toggleEditMode,
 } from '../../redux/profile-reducer';
-import { withRouter, Redirect } from 'react-router-dom';
+import { Redirect, useRouteMatch } from 'react-router-dom';
 import { compose } from 'redux';
 import MyPostsContainer from './MyPosts/MyPostsContainer';
 import Preloader from '../common/preloader/Preloader';
@@ -14,70 +16,62 @@ import PostArea from './PostArea/PostArea';
 
 // First iteration
 
-class ProfileContainer extends React.Component {
-	refreshProfile() {
-		let userId = this.props.match.params.userId;
+
+const ProfileContainer = (props) => {
+	let match = useRouteMatch('/profile/:userId?')
+	const dispatch = useDispatch()
+
+	let userId = match.params.userId;
+
+	if (!userId) {
+		userId = props.authId;
+	}
+
+	useEffect(() => {
+		dispatch(getUserProfile(userId));
+		dispatch(getUserStatus(userId));
+	}, [dispatch, userId])
+
+	// redirect to login
+	if (!props.isAuth) {
+		let userId = match.params.userId;
 		if (!userId) {
-			userId = this.props.authId;
-		}
-		this.props.getUserProfile(userId);
-		this.props.getUserStatus(userId);
-	}
-	
-	componentDidMount() {
-		this.refreshProfile();
-	}
-
-	componentDidUpdate(prevProps, prevState, snapshot) {
-		if (this.props.match.params.userId !== prevProps.match.params.userId) {
-			this.refreshProfile();
+			return <Redirect to={'/login'} />
 		}
 	}
 
-	render() {
-
-		if (!this.props.isAuth) {
-			let userId = this.props.match.params.userId;
-			if (!userId) {
-				return <Redirect to={'/login'} />
+	return (
+		<>
+			{props.isFetching ? <Preloader /> : null}
+			<Profile
+				{...props}
+				isAvatarFetching={props.isAvatarFetching}
+				profile={props.profile}
+				status={props.status}
+				updateUserStatus={props.updateUserStatus}
+				userId={match.params.userId}
+				savePhoto={props.savePhoto}
+			/>
+			{!match.params.userId &&
+				<PostArea />
 			}
-		}
+			<MyPostsContainer />
 
-		return (
-			<>
-				{this.props.isFetching ? <Preloader /> : null}
-				<Profile
-					{...this.props}
-					profile={this.props.profile}
-					status={this.props.status}
-					updateUserStatus={this.props.updateUserStatus}
-					userId={this.props.match.params.userId}
-				/>
-				{!this.props.match.params.userId &&
-					<PostArea />
-				}
-				<MyPostsContainer />
-
-			</>
-		);
-	}
+		</>
+	);
 }
 
 let mapStateToProps = (state) => ({
+	isAvatarFetching: state.profilePage.isAvatarFetching,
 	isFetching: state.profilePage.isFetching,
 	profile: state.profilePage.profile,
 	authId: state.auth.id,
 	status: state.profilePage.status,
 	isAuth: state.auth.isAuth,
+	isEditMode: state.profilePage.isEditMode,
 });
 
-// let withUrlDataContainerComponent = withRouter(ProfileContainer);
-
-// export default connect(mapStateToProps, { getUserProfile })(
-//   withUrlDataContainerComponent
-// );
 
 export default compose(
-	connect(mapStateToProps, { getUserProfile, getUserStatus, updateUserStatus }),
-	withRouter,
+	connect(mapStateToProps, { getUserProfile, getUserStatus, updateUserStatus, savePhoto, toggleEditMode }),
 )(ProfileContainer);

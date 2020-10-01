@@ -9,12 +9,12 @@ const instance = Axios.create({
 })
 
 export const usersAPI = {
-	async getUsers(currentPage = 1, pageSize = 10) {
+	async getUsers(currentPage = 1, pageSize = 10, term='') {
 
 		const response = await instance.get(
-			`users?page=${ currentPage }&count=${ pageSize }`);
+			`users?page=${ currentPage }&count=${ pageSize }&term=${term}`);
 		return response.data;
-		
+
 	},
 
 	async follow(userId) {
@@ -34,28 +34,9 @@ export const usersAPI = {
 	getProfile(userId) {
 		console.warn('Absolute method. Please use profileAPI object')
 		return profileAPI.getProfile(userId)
-	}
+	},
 
 }
-
-
-// *export const followUsers = (userId) => {
-
-//* 	return instance.post(
-//* 		`follow/${ userId }`,
-//* 		{},
-//* 	).then(response => response.data);
-
-//* }
-
-//* export const unfollowUsers = (userId) => {
-
-//* 	return instance.delete(
-//* 		`follow/${ userId }`,
-//* 		{},
-//* 	).then(response => response.data);
-
-//* }
 
 export const profileAPI = {
 	getProfile(userId) {
@@ -68,7 +49,17 @@ export const profileAPI = {
 
 	updateStatus(status) {
 		return instance.put(`profile/status`, { status })
-	}
+	},
+
+	saveAvatar(file, config) {
+		let formData = new FormData();
+		formData.append('image', file)
+		return instance.put(`profile/photo`, formData, config)
+	},
+
+	updateSettings(profile) {
+		return instance.put(`profile`, profile)
+	},
 }
 
 
@@ -78,14 +69,18 @@ export const authAPI = {
 		return instance.get(`auth/me`)
 	},
 
-	login(email, password, rememberMe = false) {
+	login(email, password, rememberMe = false, captcha) {
 		return instance.post(`auth/login`, {
-			email, password, rememberMe
+			email, password, rememberMe, captcha
 		})
 	},
 
 	logout() {
 		return instance.delete(`auth/login`)
+	},
+	
+	getCaptcha() {
+		return instance.get(`security/get-captcha-url`)
 	}
 }
 
