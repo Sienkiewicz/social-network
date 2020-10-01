@@ -57,7 +57,7 @@ const App = () => {
 						<Switch>
 							<Route exact path='/' render={userId ?
 								() => <Redirect to={'/profile/' + userId} /> :
-								() => <Redirect to='/profile' />} />
+								() => <Redirect to='/login' />} />
 							<Route exact path='/profile' render={userId ?
 								() => <Redirect to={'/profile/' + userId} /> :
 								() => <Redirect to='/login' />} />
@@ -74,11 +74,11 @@ const App = () => {
 				</div>
 			</div>
 			<div className='bottomNavBar'>
-				<FontAwesomeIcon
+				{userId && <FontAwesomeIcon
 					className='bottomNavBar__iconSettings fa-2x'
 					icon={faCog}
 					onClick={() => dispatch(toggleEditMode(!isEditMode))}
-				/>
+				/>}
 				<FontAwesomeIcon
 					onClick={() => setOpenSidebar(!openSidebar)}
 					className='bottomNavBar__iconBurger fa-2x'
