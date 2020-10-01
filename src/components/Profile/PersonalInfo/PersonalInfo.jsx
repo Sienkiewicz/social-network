@@ -86,7 +86,7 @@ class PersonalInfo extends React.Component {
 					</div>
 					<div className={s.containerInfo}>
 						<h2>
-							{this.props.profile.fullName} {!this.props.userId && <div> <FontAwesomeIcon
+							{this.props.profile.fullName} {+this.props.userId === this.props.authId && <div> <FontAwesomeIcon
 								className={s.settings}
 								icon={faCog}
 								onClick={() => this.props.toggleEditMode(!this.props.isEditMode)}
