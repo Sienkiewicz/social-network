@@ -64,7 +64,7 @@ class PersonalInfo extends React.Component {
 							src={this.props.profile.photos.large || userPhoto}
 							alt=''
 						/>
-						{!this.props.userId && <div
+						{+this.props.userId === this.props.authId && <div
 							onClick={() => this.fileInput.click()}
 							className={s.input}
 						>

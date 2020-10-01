@@ -15,6 +15,7 @@ const Profile = (props) => {
 				isEditMode={props.isEditMode}
 				profile={props.profile}
 				toggleEditMode={props.toggleEditMode}
+				authId={props.authId}
 			/>
 			<ProfileStatus
 				authId={props.authId}
