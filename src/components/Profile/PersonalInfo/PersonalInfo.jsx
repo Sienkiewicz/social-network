@@ -103,46 +103,4 @@ class PersonalInfo extends React.Component {
 	}
 }
 
-
-// const PersonalInfo = (props) => {
-// 	if (!props.profile) {
-// 		return <Preloader />;
-// 	}
-
-// 	const changeAvatar = () => {
-// 		console.log(changeAvatar);
-// 	}
-
-// 	return (
-// 		<div>
-// 			<div className={s.persInfo}>
-// 				<div className={s.avatar}>
-// 					<img
-// 						// className={s.avatar}
-// 						src={props.profile.photos.large || userPhoto}
-// 						alt=''
-// 					/>
-// 				</div>
-// 				<div>
-// 					<h1> {props.profile.fullName} </h1>
-// 					<ul>
-// 						<li className={s.item}>
-// 							Looking for a job? {props.profile.lookingForAJobDescription}
-// 						</li>
-// 						<li>City: Wroclaw</li>
-// 						<li>Education: UkrDLTU</li>
-// 						<li>
-// 							Instagram:{' '}
-// 							<a target='blank' href={props.profile.contacts.instagram}>
-// 								{props.profile.contacts.instagram}
-// 							</a>
-//               /
-//             </li>
-// 					</ul>
-// 				</div>
-// 			</div>
-// 		</div>
-// 	);
-// };
-
 export default PersonalInfo;

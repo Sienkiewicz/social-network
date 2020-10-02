@@ -2,8 +2,6 @@ import React from 'react';
 import ProfileStatus from './ProfileStatus/ProfileStatus';
 import PersonalInfo from './PersonalInfo/PersonalInfo';
 
-// First iteration
-
 const Profile = (props) => {
 	
 	return (

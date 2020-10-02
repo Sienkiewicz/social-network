@@ -6,6 +6,7 @@ import { connect, useSelector } from 'react-redux';
 import { login } from '../../redux/auth-reducer';
 import { Redirect } from 'react-router-dom';
 import s from '../common/FormsControl/FormControls.module.scss';
+import style from './Login.module.scss';
 import PreloaderCircle from './../common/preloaders/PreloaderCircle'
 import { useEffect } from 'react';
 
@@ -16,13 +17,12 @@ const LoginForm = (props) => {
 	const captchaUrl = useSelector(state => state.auth.captchaUrl)
 
 	useEffect(() => {
-		console.log(isFetching);
 	}, [isFetching])
 	return (
 		<form
 			onSubmit={props.handleSubmit}
 		>
-			<div>
+			<div className={style.content}>
 				<div>
 					<Field
 						typeField='input'
@@ -70,8 +70,12 @@ const LoginForm = (props) => {
 						: <div>Login</div>}
 					</button>
 				</div>
-
 			</div>
+		<div className={style.message}>
+				<div>If you would like to check this webpage, please feel free to ask for a username and password.</div>
+				<div>Peter Sinkevych</div>
+				<div><b>peter@sinkevich.com.ua</b></div>
+		</div>
 		</form>
 	);
 };

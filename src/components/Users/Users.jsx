@@ -7,7 +7,6 @@ import User from './User';
 
 let Users = (props) => {
 	const users = useSelector(state => state.usersPage.users)
-	console.log(users);
 
 	return (
 		<div >
