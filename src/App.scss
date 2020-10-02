@@ -120,7 +120,7 @@ button {
   width: 90px;
   height: 30px;
   text-align-last: right;
-  padding-right: 20px;
+//   padding-right: 20px;
   color: #fff;
 }
 
@@ -146,4 +146,16 @@ button {
   img {
     width: 20%;
   }
+}
+
+.circlePreloader {
+	height: 30px;
+	overflow: hidden;
+	position: relative;
+
+	img {
+		position: absolute;
+		left: 0;
+		top: -100%;
+	}
 }

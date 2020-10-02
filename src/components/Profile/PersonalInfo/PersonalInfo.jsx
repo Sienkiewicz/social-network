@@ -1,6 +1,6 @@
 import React from 'react';
 import s from './PersonalInfo.module.scss';
-import Preloader from '../../common/preloader/Preloader';
+import Preloader from '../../common/preloaders/Preloader';
 import userPhoto from '../../../assets/icons/icon_developer.jpg'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCog } from '@fortawesome/free-solid-svg-icons'

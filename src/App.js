@@ -13,7 +13,7 @@ import Login from './components/Login/Login';
 import { useSelector, useDispatch } from 'react-redux';
 import { initializeApp } from './redux//app-reducer';
 import { toggleEditMode } from './redux//profile-reducer';
-import Preloader from './components/common/preloader/Preloader';
+import Preloader from './components/common/preloaders/Preloader';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBars, faCog } from '@fortawesome/free-solid-svg-icons'
 import NotFound from './components/NotFound';

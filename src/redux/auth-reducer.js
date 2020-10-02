@@ -1,8 +1,10 @@
 import { authAPI } from "../api/api";
 import { stopSubmit } from "redux-form";
+import { toggleFetching } from "./profile-reducer";
 
-const SET_USER_DATA = 'SET_USER_DATA';
-const SET_CAPTCHA_URL = 'SET_CAPTCHA_URL';
+const SET_USER_DATA = 'soc/auth/SET_USER_DATA';
+const SET_CAPTCHA_URL = 'soc/auth/SET_CAPTCHA_URL';
+const TOGGLE_FETCHING_LOGIN = 'soc/auth/TOGGLE_FETCHING_LOGIN';
 
 let initialState = {
 	id: null,
@@ -27,6 +29,12 @@ const authReducer = (state = initialState, action) => {
 				...action.payload,
 			};
 
+		case TOGGLE_FETCHING_LOGIN:
+			return {
+				...state,
+				...action.payload,
+			};
+
 		default:
 			return state;
 	}
@@ -34,8 +42,10 @@ const authReducer = (state = initialState, action) => {
 
 export const setAuthUserData = (id, email, login, isAuth) => ({ type: SET_USER_DATA, payload: { id, email, login, isAuth } });
 export const setCaptchaUrl = (captchaUrl) => ({ type: SET_CAPTCHA_URL, payload: { captchaUrl } });
+export const toggleFetchingLogin = (isFetching) => ({ type: TOGGLE_FETCHING_LOGIN, payload: { isFetching } });
 
 export const getAuthUserData = () => async (dispatch) => {
+
 	const response = await authAPI.me();
 	if (response.data.resultCode === 0) {
 		let { id, email, login } = response.data.data;
@@ -43,19 +53,22 @@ export const getAuthUserData = () => async (dispatch) => {
 	}
 }
 
-export const login = (email, password, rememberMe, captcha) => async (dispatch) => {
+export const login = (email, password, rememberMe, captcha) => async (dispatch, getState) => {
 	try {
+		dispatch(toggleFetchingLogin(true))
 		const response = await authAPI.login(email, password, rememberMe, captcha);
 		if (response.data.resultCode === 0) {
-			dispatch(getAuthUserData());
+			dispatch(getAuthUserData()).then(dispatch(toggleFetchingLogin(false)))
 		}
 		else {
 			if (response.data.resultCode === 10) {
-			dispatch(getCaptchaUrl())
+				dispatch(getCaptchaUrl())
+				dispatch(toggleFetchingLogin(false))
 			}
 		}
 	} catch (error) {
 		dispatch(stopSubmit('login', { _error: error }));
+		dispatch(toggleFetchingLogin(false))
 	}
 }
 

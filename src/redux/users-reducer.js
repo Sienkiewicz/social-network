@@ -1,13 +1,13 @@
 import { usersAPI } from "../api/api";
 import { updateObjInArray } from "../utils/object-helpers";
 
-const FOLLOW = 'FOLLOW';
-const UNFOLLOW = 'UNFOLLOW';
-const SET_USERS = 'SET_USERS';
-const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE';
-const SET_TOTAL_USERS_COUNT = 'SET_TOTAL_USERS_COUNT';
-const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING';
-const TOGGLE_IS_FOLLOWING_PROGRESS = 'TOGGLE_IS_FOLLOWING_PROGRESS';
+const FOLLOW = 'soc/users/FOLLOW';
+const UNFOLLOW = 'soc/users/UNFOLLOW';
+const SET_USERS = 'soc/users/SET_USERS';
+const SET_CURRENT_PAGE = 'soc/users/SET_CURRENT_PAGE';
+const SET_TOTAL_USERS_COUNT = 'soc/users/SET_TOTAL_USERS_COUNT';
+const TOGGLE_IS_FETCHING = 'soc/users/TOGGLE_IS_FETCHING';
+const TOGGLE_IS_FOLLOWING_PROGRESS = 'soc/users/TOGGLE_IS_FOLLOWING_PROGRESS';
 
 let initialState = {
 	users: [],

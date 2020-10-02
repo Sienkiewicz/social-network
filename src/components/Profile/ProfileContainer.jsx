@@ -11,7 +11,7 @@ import {
 import { Redirect, useRouteMatch } from 'react-router-dom';
 import { compose } from 'redux';
 import MyPostsContainer from './MyPosts/MyPostsContainer';
-import Preloader from '../common/preloader/Preloader';
+import Preloader from '../common/preloaders/Preloader';
 import PostArea from './PostArea/PostArea';
 
 // First iteration

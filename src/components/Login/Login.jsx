@@ -6,11 +6,18 @@ import { connect, useSelector } from 'react-redux';
 import { login } from '../../redux/auth-reducer';
 import { Redirect } from 'react-router-dom';
 import s from '../common/FormsControl/FormControls.module.scss';
+import PreloaderCircle from './../common/preloaders/PreloaderCircle'
+import { useEffect } from 'react';
 
 let maxLength30 = maxLengthCreator(30);
 
 const LoginForm = (props) => {
+	const isFetching = useSelector(state => state.auth.isFetching)
 	const captchaUrl = useSelector(state => state.auth.captchaUrl)
+
+	useEffect(() => {
+		console.log(isFetching);
+	}, [isFetching])
 	return (
 		<form
 			onSubmit={props.handleSubmit}
@@ -46,7 +53,7 @@ const LoginForm = (props) => {
 					/>
           remember me
         </div>
-			 {captchaUrl && <img src={captchaUrl} alt='captcha' />} 
+				{captchaUrl && <img src={captchaUrl} alt='captcha' />}
 				{captchaUrl && <Field
 					placeholder={'Symbols from image'}
 					name={'captcha'}
@@ -55,12 +62,15 @@ const LoginForm = (props) => {
 					component={TextForm}
 					validate={[required]}
 					className={s.rememberMe}
-				/>} 
+				/>}
 				{props.error && <div className={s.formSummeryError}>{props.error}</div>}
 				<div>
-					<button>Login</button>
+					<button>{isFetching
+						? <div><PreloaderCircle /></div>
+						: <div>Login</div>}
+					</button>
 				</div>
-				
+
 			</div>
 		</form>
 	);
