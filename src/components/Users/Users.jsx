@@ -1,13 +1,10 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
 import Pagination from '../common/pagination/Pagination';
 import User from './User';
 
 
 
 let Users = (props) => {
-	const users = useSelector(state => state.usersPage.users)
-
 	return (
 		<div >
 			{props.users.map((u) =>

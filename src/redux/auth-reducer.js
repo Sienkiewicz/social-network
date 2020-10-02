@@ -1,6 +1,5 @@
 import { authAPI } from "../api/api";
 import { stopSubmit } from "redux-form";
-import { toggleFetching } from "./profile-reducer";
 
 const SET_USER_DATA = 'soc/auth/SET_USER_DATA';
 const SET_CAPTCHA_URL = 'soc/auth/SET_CAPTCHA_URL';
