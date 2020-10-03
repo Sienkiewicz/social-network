@@ -72,9 +72,8 @@ const LoginForm = (props) => {
 				</div>
 			</div>
 		<div className={style.message}>
-				<div>If you would like to check this webpage, please feel free to ask for a username and password.</div>
-				<div>Peter Sinkevych</div>
-				<div><b>peter@sinkevich.com.ua</b></div>
+				<div>Feel free to use this: <b> Email: free@samuraijs.com Password: free </b></div>
+				<div>Sorry, but it's a beta and this webpage may not work on IOS </div>
 		</div>
 		</form>
 	);
