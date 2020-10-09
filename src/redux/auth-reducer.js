@@ -4,6 +4,7 @@ import { stopSubmit } from "redux-form";
 const SET_USER_DATA = 'soc/auth/SET_USER_DATA';
 const SET_CAPTCHA_URL = 'soc/auth/SET_CAPTCHA_URL';
 const TOGGLE_FETCHING_LOGIN = 'soc/auth/TOGGLE_FETCHING_LOGIN';
+const ADD_ERROR_MESSAGES = 'soc/auth/ADD_ERROR_MESSAGES';
 
 let initialState = {
 	id: null,
@@ -12,6 +13,7 @@ let initialState = {
 	isFetching: false,
 	isAuth: false,
 	captchaUrl: null,
+	error: [],
 }
 
 const authReducer = (state = initialState, action) => {
@@ -34,6 +36,12 @@ const authReducer = (state = initialState, action) => {
 				...action.payload,
 			};
 
+		case ADD_ERROR_MESSAGES:
+			return {
+				...state,
+				...action.payload,
+			};
+
 		default:
 			return state;
 	}
@@ -42,6 +50,7 @@ const authReducer = (state = initialState, action) => {
 export const setAuthUserData = (id, email, login, isAuth) => ({ type: SET_USER_DATA, payload: { id, email, login, isAuth } });
 export const setCaptchaUrl = (captchaUrl) => ({ type: SET_CAPTCHA_URL, payload: { captchaUrl } });
 export const toggleFetchingLogin = (isFetching) => ({ type: TOGGLE_FETCHING_LOGIN, payload: { isFetching } });
+export const addErrorMessages = (error) => ({ type: ADD_ERROR_MESSAGES, payload: { error } });
 
 export const getAuthUserData = () => async (dispatch) => {
 
@@ -63,6 +72,11 @@ export const login = (email, password, rememberMe, captcha) => async (dispatch, 
 			if (response.data.resultCode === 10) {
 				dispatch(getCaptchaUrl())
 				dispatch(toggleFetchingLogin(false))
+			} else {
+				if (response.data.resultCode !== 0) {
+					dispatch(toggleFetchingLogin(false))
+					dispatch(addErrorMessages(response.data.messages));
+				}
 			}
 		}
 	} catch (error) {

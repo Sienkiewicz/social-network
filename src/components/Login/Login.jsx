@@ -2,19 +2,25 @@ import React from 'react';
 import { reduxForm, Field } from 'redux-form';
 import { TextForm } from '../common/FormsControl/FormControls';
 import { required, maxLengthCreator } from '../../utils/validators/validators';
-import { connect, useSelector } from 'react-redux';
+import { connect, useDispatch, useSelector } from 'react-redux';
 import { login } from '../../redux/auth-reducer';
 import { Redirect } from 'react-router-dom';
 import s from '../common/FormsControl/FormControls.module.scss';
 import style from './Login.module.scss';
 import PreloaderCircle from './../common/preloaders/PreloaderCircle'
 import { useEffect } from 'react';
+import { addErrorMessages} from './../../redux/auth-reducer'
 
 let maxLength30 = maxLengthCreator(30);
 
 const LoginForm = (props) => {
 	const isFetching = useSelector(state => state.auth.isFetching)
 	const captchaUrl = useSelector(state => state.auth.captchaUrl)
+	const errorMessages = useSelector(state => state.auth.error)
+
+	const dispatch = useDispatch()
+	
+
 
 	useEffect(() => {
 	}, [isFetching])
@@ -31,6 +37,7 @@ const LoginForm = (props) => {
 						placeholder={'Email'}
 						name={'email'}
 						className={s.field}
+						onChange={() => dispatch(addErrorMessages([]))}
 					/>
 				</div>
 				<div>
@@ -42,6 +49,7 @@ const LoginForm = (props) => {
 						component={TextForm}
 						validate={[required, maxLength30]}
 						className={s.field}
+						onChange={() => dispatch(addErrorMessages([]))}
 					/>
 				</div>
 				<div>
@@ -64,6 +72,7 @@ const LoginForm = (props) => {
 					className={s.rememberMe}
 				/>}
 				{props.error && <div className={s.formSummeryError}>{props.error}</div>}
+				{errorMessages && <div className={s.formSummeryError}>{errorMessages[0]}</div>}
 				<div>
 					<button>{isFetching
 						? <div><PreloaderCircle /></div>
