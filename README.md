@@ -61,7 +61,7 @@ ____________________________________________________________________
 ![Changing status](src/assets/images_for_MD/Usability.gif) <br>
 
 
-## About a project
+## About the project
 
 It's not my project. This API is creates a tough guy from Belarus. [deep and cool tutorials](https://www.youtube.com/playlist?list=PLcvhF2Wqh7DNVy1OCUpG3i5lyxyBWhGZ8) I learned from his tutorials, but a lot of his code is outdated, and I rewrite  a lot of things to new code using new tools, such as hooks or formic instead redux-form (it's easier).
 It's a long project for my practice. If you notice, some page is not ready.
