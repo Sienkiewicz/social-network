@@ -1,68 +1,72 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<h1 align='center'> BUILDING A SOCIAL NETWORK (PRACTICE)</h1>
 
-## Available Scripts
+![Title of profile](src/assets/images_for_MD/Title.png) <br>
 
-In the project directory, you can run:
+#### *social network in miniature - is a best practice to learn how to use React, Redux, REST.API* <br>
 
-### `npm start`
+## [View a Demo](https://dev-soc-network.netlify.app/#/profile/8480)
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+____________________________________________________________________
+## What stack?
+**- React**<br> 
+**- React-router**<br> 
+**- React-hooks**<br> 
+**- Redux**<br> 
+**- Redux-thunk**<br> 
+**- Redux-hooks**<br> 
+**- AJAX**<br> 
+**- SASS**<br> 
+**- HTML5**<br> 
+____________________________________________________________________
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+## Description
 
-### `npm test`
+It's a platform for practice, not for build new brand facebbok. <br>
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+I used simple free API with users, where I can: 
+- build my profile
+- follow/unfollow users
+- change status
+- change links for social networks
+- add avatar
+- load users
+- login/logout
+- use simple captcha, when I write wrong email or pass repeatedly
+____________________________________________________________________
 
-### `npm run build`
+**CHANGING AVATAR**
+<br> 
+<br> 
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+![Changing avatar](src/assets/images_for_MD/Change_avatar.gif) <br>
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+**CHANGING STATUS**
+<br> 
+<br> 
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+![Changing status](src/assets/images_for_MD/Change_status.gif) <br>
 
-### `npm run eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+**ADD LINK, FOR EXAMPLE, ON GITHUB**
+<br> 
+<br> 
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+![Changing status](src/assets/images_for_MD/GIF_add_github_link.gif) <br>
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+**HOW IT WORKS**
+<br> 
+<br> 
 
-## Learn More
+![Changing status](src/assets/images_for_MD/Usability.gif) <br>
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## About a project
 
-### Code Splitting
+It's not my project. This API is creates a tough guy from Belarus. [deep and cool tutorials](https://www.youtube.com/playlist?list=PLcvhF2Wqh7DNVy1OCUpG3i5lyxyBWhGZ8) I learned from his tutorials, but a lot of his code is outdated, and I rewrite  a lot of things to new code using new tools, such as hooks or formic instead redux-form (it's easier).
+It's a long project for my practice. If you notice, some page is not ready.
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+## Future scope
+- add **news**, **settings**, posibly music.
+- add a simple search for users.
+- rewrite this code on **typescript**.
