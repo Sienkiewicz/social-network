@@ -3,7 +3,7 @@ import DialogItem from './DialogItem/DialogItem';
 import Message from './Message/Message';
 import s from './Messages.module.scss';
 import { useSelector, useDispatch } from 'react-redux';
-import { addMessageActionCreator } from '../../redux/messages-reducer';
+import { actions } from '../../redux/messages-reducer';
 import { withAuthRedirect } from '../hoc/withAuthRedirect';
 import { Formik, Field, Form } from 'formik';
 
@@ -11,7 +11,7 @@ const SignupForm = () => {
 
 	const dispatch = useDispatch()
 	let onSubmit = (values, onSubmitProps) => {
-		dispatch(addMessageActionCreator(values.message));
+		dispatch(actions.addMessageActionCreator(values.message));
 		onSubmitProps.resetForm()
 	}
 	return (

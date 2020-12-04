@@ -1,0 +1,35 @@
+.wrap {
+  text-align: center;
+  padding: 0px 10px;
+  margin-top: 50px;
+}
+
+.wrap .title {
+  color: #fff;
+  line-height: 40px;
+  margin-bottom: 20px;
+  background: #a4dada;
+  border-radius: 20px;
+}
+
+.wrap .user {
+  overflow: hidden;
+}
+
+.wrap .user img {
+  border-radius: 50%;
+  width: 100%;
+}
+
+.wrap .user p {
+  margin-top: 5px;
+  color: #fff;
+}
+
+.wrap .users {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr 1fr 1fr;
+      grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 7px;
+}

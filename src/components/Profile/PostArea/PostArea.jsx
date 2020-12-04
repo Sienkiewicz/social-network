@@ -1,7 +1,7 @@
 import React from 'react'
 import { useDispatch } from 'react-redux';
 import { Formik, Form, Field } from 'formik';
-import { addPostActionCreator } from '../../../redux/profile-reducer';
+import { actions } from '../../../redux/profile-reducer';
 import s from './PostArea.module.scss'
 
 
@@ -9,7 +9,7 @@ const SignupForm = () => {
 
 	const dispatch = useDispatch()
 	let onSubmit = (values, onSubmitProps) => {
-		dispatch(addPostActionCreator(values.textOfNewPost));
+		dispatch(actions.addPostActionCreator(values.textOfNewPost));
 		onSubmitProps.resetForm()
 	}
 	return (

@@ -1,39 +1,51 @@
-import React from 'react';
-import s from './PersonalInfo.module.scss';
-import Preloader from '../../common/preloaders/Preloader';
+import React, { ChangeEvent, CSSProperties } from 'react'
+import s from './PersonalInfo.module.scss'
+import Preloader from '../../common/preloaders/Preloader'
 import userPhoto from '../../../assets/icons/icon_developer.jpg'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCog } from '@fortawesome/free-solid-svg-icons'
-import AboutMe from './AboutMe';
-import SettingsFields from './SettingsFields';
-import SocLinks from './SocLinks';
+import AboutMe from './AboutMe'
+import SettingsFields from './SettingsFields'
+import SocLinks from './SocLinks'
+import { AxiosRequestConfig } from 'axios'
+
+type PropsType = {
+	savePhoto: (file: File, config: AxiosRequestConfig) => void
+	toggleEditMode: (isEditMode: boolean) => void
+	userId: number
+	profile: any
+	authId: number
+	isAvatarFetching: boolean
+	isEditMode: boolean
+}
 
 
-class PersonalInfo extends React.Component {
+class PersonalInfo extends React.Component<PropsType> {
+	fileInput?: any
 	state = {
 		uploadPercentage: 0,
 		editMode: false,
 	}
 
 	config = {
-		onUploadProgress: progressEvent => {
+		onUploadProgress: (progressEvent: ProgressEvent):void => {
 			this.setState({
-				uploadPercentage: parseInt(Math.round(progressEvent.loaded / progressEvent.total * 100))
+				uploadPercentage: Math.round(progressEvent.loaded / progressEvent.total * 100)
 			})
 				;
 		}
 	}
 
-	fileSelectedHandler = e => {
+	fileSelectedHandler = (e:ChangeEvent<HTMLInputElement>) => {
 		e.preventDefault();
-		if (e.target.files.length) {
+		if (e.target.files && e.target.files.length) {
 			this.props.savePhoto(e.target.files[0], this.config);
 		}
 	}
 
 	render() {
 
-		const myStyleDivPercentage = {
+		const myStyleDivPercentage: CSSProperties = {
 			background: 'rgba(0,153,153, 0.7)',
 			position: 'absolute',
 			height: `${ this.state.uploadPercentage }%`,
@@ -45,11 +57,6 @@ class PersonalInfo extends React.Component {
 			transition: '0.2s',
 			color: 'white',
 		}
-
-		// const myStylePPercentage ={
-		// 	display: 'inlineBlock',
-		// 	verticalAlign: 'middle',
-		// }
 
 		if (!this.props.profile) {
 			return <Preloader />;
@@ -93,7 +100,7 @@ class PersonalInfo extends React.Component {
 							/>
 							</div>}
 						</h2>
-						<AboutMe profile={this.props.profile} />
+						<AboutMe />
 					</div>
 					{this.props.isEditMode && <SettingsFields />}
 				</div>

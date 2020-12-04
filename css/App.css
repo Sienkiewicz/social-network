@@ -1,0 +1,204 @@
+body {
+  background: #f2f2f2;
+}
+
+.app-wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  overflow: hidden;
+  max-width: 900px;
+  margin: 0 auto;
+  -webkit-box-align: stretch;
+      -ms-flex-align: stretch;
+          align-items: stretch;
+}
+
+.app-wrapper .bottomNavBar {
+  display: none;
+  position: fixed;
+  width: 100%;
+  background: #009999;
+  left: 0;
+  bottom: 0;
+  padding-right: 10px;
+  padding-left: 10px;
+  z-index: 2;
+}
+
+.app-wrapper .bottomNavBar .bottomNavBar__iconSettings {
+  display: none;
+  height: 50px;
+  -webkit-filter: invert(100%);
+          filter: invert(100%);
+}
+
+@media (max-width: 600px) {
+  .app-wrapper .bottomNavBar .bottomNavBar__iconSettings {
+    display: inline-block;
+  }
+}
+
+.app-wrapper .bottomNavBar .bottomNavBar__iconBurger {
+  height: 50px;
+  float: right;
+  -webkit-filter: invert(100%);
+          filter: invert(100%);
+}
+
+@media (max-width: 900px) {
+  .app-wrapper .bottomNavBar {
+    display: block;
+  }
+}
+
+.container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin-top: 10px;
+}
+
+.container .sidebar {
+  width: 200px;
+  background: #009999;
+  -webkit-transition: 1s;
+  -o-transition: 1s;
+  transition: 1s;
+}
+
+@media (max-width: 900px) {
+  .container .sidebar {
+    position: absolute;
+    -webkit-transform: translateX(-300px);
+        -ms-transform: translateX(-300px);
+            transform: translateX(-300px);
+    z-index: 1;
+    height: 100%;
+  }
+}
+
+@media (max-width: 900px) {
+  .container .openSidebar {
+    -webkit-transform: translateX(0px);
+        -ms-transform: translateX(0px);
+            transform: translateX(0px);
+    -webkit-transition: 1s;
+    -o-transition: 1s;
+    transition: 1s;
+    width: 300px;
+  }
+}
+
+@media (max-width: 400px) {
+  .container .openSidebar {
+    width: 100%;
+  }
+}
+
+.container .content {
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-bottom: 70px;
+  width: 100%;
+}
+
+.container .content img {
+  max-width: 100%;
+}
+
+h2 {
+  font-weight: bold;
+  font-size: 1.6rem;
+}
+
+textarea {
+  margin: 0 auto;
+  font-size: 1.2rem;
+  width: 100%;
+  max-width: 90%;
+  height: 100px;
+  border: 1px solid #009999;
+  margin-top: 10px;
+  background: #e2e2e2;
+}
+
+textarea::-webkit-input-placeholder {
+  padding: 5px 0px 0px 10px;
+  color: grey;
+}
+
+textarea:-ms-input-placeholder {
+  padding: 5px 0px 0px 10px;
+  color: grey;
+}
+
+textarea::-ms-input-placeholder {
+  padding: 5px 0px 0px 10px;
+  color: grey;
+}
+
+textarea::placeholder {
+  padding: 5px 0px 0px 10px;
+  color: grey;
+}
+
+button {
+  background-color: grey;
+  margin-top: 10px;
+  -ms-flex-item-align: end;
+      align-self: flex-end;
+  right: 100px;
+  bottom: 10px;
+  width: 90px;
+  height: 30px;
+  text-align-last: right;
+  color: #fff;
+}
+
+.preloader {
+  position: fixed;
+  /* Sit on top of the page content */
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  /* Hidden by default */
+  width: 100%;
+  /* Full width (cover the whole page) */
+  height: 100%;
+  /* Full height (cover the whole page) */
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(255, 255, 255, 0.8);
+  /* Black background with opacity */
+  z-index: 2;
+  /* Specify a stack order in case you're using a different order for other elements */
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.preloader img {
+  width: 20%;
+}
+
+.circlePreloader {
+  height: 30px;
+  overflow: hidden;
+  position: relative;
+}
+
+.circlePreloader img {
+  position: absolute;
+  left: 0;
+  top: -100%;
+}

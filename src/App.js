@@ -2,21 +2,21 @@
 import React, { useEffect, useState, Suspense } from 'react';
 import './Scss/nullstyle.scss';
 import './App.scss';
-import { Redirect, Route, Switch } from 'react-router-dom';
+import { Redirect, Route, Switch, useRouteMatch } from 'react-router-dom';
 import News from './components/News/News';
 import Music from './components/Music/Music';
 import Settings from './components/Settings/Settings';
 import Navbar from './components/Navbar/Navbar';
-import Sidebar from './components/Sidebar/Sidebar';
+// import Sidebar from './components/Sidebar/Sidebar';
 import HeaderContainer from './components/Header/HeaderContainer';
 import Login from './components/Login/Login';
 import { useSelector, useDispatch } from 'react-redux';
 import { initializeApp } from './redux//app-reducer';
-import { toggleEditMode } from './redux//profile-reducer';
 import Preloader from './components/common/preloaders/Preloader';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBars, faCog } from '@fortawesome/free-solid-svg-icons'
 import NotFound from './components/NotFound';
+import { actions } from './redux/profile-reducer';
 
 const UsersContainer = React.lazy(() => import('./components/Users/UsersContainer'));
 const ProfileContainer = React.lazy(() => import('./components/Profile/ProfileContainer'));
@@ -27,8 +27,9 @@ const App = () => {
 	const initialized = useSelector(state => state.app.initialized);
 	const isEditMode = useSelector(state => state.profilePage.isEditMode)
 	const userId = useSelector(state => state.auth.id)
-	const dispatch = useDispatch()
-
+	const dispatch = useDispatch(actions)
+	const match = useRouteMatch('/users')
+	const matchProfile = useRouteMatch('/profile/:userId?')
 
 	useEffect(() => {
 		dispatch(initializeApp());
@@ -50,7 +51,7 @@ const App = () => {
 					<Navbar
 						setOpenSidebar={setOpenSidebar}
 					/>
-					<Sidebar />
+					{/* <Sidebar /> */}
 				</div>
 				<div className="content">
 					<Suspense fallback={<Preloader />}>
@@ -74,10 +75,10 @@ const App = () => {
 				</div>
 			</div>
 			<div className='bottomNavBar'>
-				{userId && <FontAwesomeIcon
+				{match === null && matchProfile!==null && userId === +matchProfile.params.userId && <FontAwesomeIcon
 					className='bottomNavBar__iconSettings fa-2x'
 					icon={faCog}
-					onClick={() => dispatch(toggleEditMode(!isEditMode))}
+					onClick={() => dispatch(actions.toggleEditMode(!isEditMode))}
 				/>}
 				<FontAwesomeIcon
 					onClick={() => setOpenSidebar(!openSidebar)}

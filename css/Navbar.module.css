@@ -1,0 +1,23 @@
+.nav {
+  padding-top: 20px;
+}
+
+.nav ul li {
+  margin-bottom: 7px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.nav ul li:hover {
+  background: rgba(189, 240, 240, 0.3);
+}
+
+.nav ul li a {
+  color: white;
+  font-size: 1.2rem;
+  display: inline-block;
+}
+
+.nav ul li:last-child {
+  margin-top: 30px;
+}

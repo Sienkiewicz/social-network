@@ -2,11 +2,11 @@ import React, { useEffect } from 'react';
 import Profile from './Profile';
 import { connect, useDispatch } from 'react-redux';
 import {
+	actions,
 	getUserProfile,
 	getUserStatus,
 	updateUserStatus,
-	savePhoto,
-	toggleEditMode,
+	savePhoto
 } from '../../redux/profile-reducer';
 import { Redirect, useRouteMatch } from 'react-router-dom';
 import { compose } from 'redux';
@@ -14,14 +14,12 @@ import MyPostsContainer from './MyPosts/MyPostsContainer';
 import Preloader from '../common/preloaders/Preloader';
 import PostArea from './PostArea/PostArea';
 
-// First iteration
-
-
 const ProfileContainer = (props) => {
 	let match = useRouteMatch('/profile/:userId?')
 	const dispatch = useDispatch()
 
 	let userId = match.params.userId;
+
 
 	if (!userId) {
 		userId = props.authId;
@@ -56,7 +54,6 @@ const ProfileContainer = (props) => {
 				<PostArea />
 			}
 			<MyPostsContainer />
-
 		</>
 	);
 }
@@ -73,5 +70,11 @@ let mapStateToProps = (state) => ({
 
 
 export default compose(
-	connect(mapStateToProps, { getUserProfile, getUserStatus, updateUserStatus, savePhoto, toggleEditMode }),
+	connect(mapStateToProps, {
+		getUserProfile,
+		getUserStatus,
+		updateUserStatus,
+		savePhoto,
+		toggleEditMode: actions.toggleEditMode
+	}),
 )(ProfileContainer);

@@ -1,4 +1,4 @@
-header {
+.header {
   display: flex;
   background-color: #009999;
   padding-top: 5px;
@@ -8,7 +8,7 @@ header {
   justify-content: space-between;
   align-items: center;
 
-  & img {
+  img {
     max-height: 100%;
     filter: invert(100%);
 
@@ -35,4 +35,8 @@ header {
 		 background: rgba(42, 53, 53, 0.5);
 	 }
   }
+}
+
+.headerTheme{
+	background-color: #000;
 }

@@ -1,0 +1,45 @@
+.wrapper {
+  background-color: #fff;
+  margin: 10px;
+  padding: 10px;
+  -webkit-box-shadow: 2px 2px lightgray;
+          box-shadow: 2px 2px lightgray;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+@media only screen and (max-width: 600px) {
+  .wrapper {
+    margin-left: 0;
+  }
+}
+
+.avatar {
+  display: block;
+}
+
+.avatar .photoUser {
+  display: inline-block;
+  width: 150px;
+  margin-right: 10px;
+  border-radius: 50%;
+}
+
+@media only screen and (max-width: 600px) {
+  .avatar .photoUser {
+    width: 50px;
+  }
+}
+
+.avatar .userInfo {
+  display: inline-block;
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+  font-weight: bold;
+  color: #0b9999;
+}

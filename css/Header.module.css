@@ -1,0 +1,51 @@
+.header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  background-color: #009999;
+  padding-top: 5px;
+  height: 50px;
+  padding: 5px 5px;
+  text-align: right;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.header img {
+  max-height: 100%;
+  -webkit-filter: invert(100%);
+          filter: invert(100%);
+}
+
+@media only screen and (max-width: 900px) {
+  .header img:hover {
+    -webkit-filter: invert(70%);
+            filter: invert(70%);
+    cursor: pointer;
+  }
+}
+
+.header .loginBlock {
+  cursor: pointer;
+  text-align: center;
+}
+
+.header .button {
+  margin-top: 0;
+  background: none;
+  width: 100%;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.header .button:hover {
+  background: rgba(42, 53, 53, 0.5);
+}
+
+.headerTheme {
+  background-color: #000;
+}

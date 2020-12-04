@@ -9,7 +9,8 @@ import s from '../common/FormsControl/FormControls.module.scss';
 import style from './Login.module.scss';
 import PreloaderCircle from './../common/preloaders/PreloaderCircle'
 import { useEffect } from 'react';
-import { addErrorMessages} from './../../redux/auth-reducer'
+import { actions } from './../../redux/auth-reducer'
+
 
 let maxLength30 = maxLengthCreator(30);
 
@@ -19,7 +20,7 @@ const LoginForm = (props) => {
 	const errorMessages = useSelector(state => state.auth.error)
 
 	const dispatch = useDispatch()
-	
+
 
 
 	useEffect(() => {
@@ -37,7 +38,7 @@ const LoginForm = (props) => {
 						placeholder={'Email'}
 						name={'email'}
 						className={s.field}
-						onChange={() => dispatch(addErrorMessages([]))}
+						onChange={() => dispatch(actions.addErrorMessages([]))}
 					/>
 				</div>
 				<div>
@@ -49,7 +50,7 @@ const LoginForm = (props) => {
 						component={TextForm}
 						validate={[required, maxLength30]}
 						className={s.field}
-						onChange={() => dispatch(addErrorMessages([]))}
+						onChange={() => dispatch(actions.addErrorMessages([]))}
 					/>
 				</div>
 				<div>
@@ -80,10 +81,10 @@ const LoginForm = (props) => {
 					</button>
 				</div>
 			</div>
-		<div className={style.message}>
+			<div className={style.message}>
 				<div>Feel free to use this: <b> Email: free@samuraijs.com Password: free </b></div>
 				<div>Sorry, but it's a beta and this webpage may not work on IOS </div>
-		</div>
+			</div>
 		</form>
 	);
 };

@@ -1,0 +1,69 @@
+.dialogs {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr 3fr;
+      grid-template-columns: 1fr 3fr;
+}
+
+.dialogsItems {
+  border-right: 1px solid #009999;
+}
+
+.dialogsItems li {
+  display: block;
+  font-size: 25px;
+  padding: 10px 5px;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.dialogsItems li > div {
+  display: inline-block;
+}
+
+.dialogsItems li > div img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.dialogsItems li a {
+  display: inline-block;
+  padding-left: 10px;
+  color: darkslategrey;
+}
+
+.dialogsItems li .active {
+  color: #009999;
+  padding: 0px 10px;
+  padding-bottom: 5px;
+  border-top: 1px solid #009999;
+  border-bottom: 1px solid #009999;
+  float: right;
+  line-height: 1.7rem;
+}
+
+.dialog {
+  font-size: 25px;
+  padding: 10px 5px;
+}
+
+.messages {
+  padding-left: 20px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+}
+
+.message {
+  font-size: 1.2rem;
+  margin-top: 10px;
+}

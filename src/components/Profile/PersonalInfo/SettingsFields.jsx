@@ -4,14 +4,14 @@ import { useSelector, useDispatch } from 'react-redux';
 import s from './PersonalInfo.module.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTimes } from '@fortawesome/free-solid-svg-icons'
-import { updateUserSettings, setErrorMessages, toggleEditMode } from '../../../redux/profile-reducer';
+import { actions } from '../../../redux/profile-reducer';
 import { useState, useEffect } from 'react';
 import StandardField from '../../common/FormsControl/StandardField';
 import * as Yup from 'yup';
 
 
 
-const SettingsFields = ({ closeTab }) => {
+const SettingsFields = () => {
 	const errorMessages = useSelector(state => state.profilePage.errorMessages)
 	const contacts = useSelector(state => state.profilePage.profile.contacts)
 	const profile = useSelector(state => state.profilePage.profile)
@@ -34,7 +34,7 @@ const SettingsFields = ({ closeTab }) => {
 	}
 
 	const updateProfile = values => {
-		dispatch(updateUserSettings(values))
+		dispatch(actions.updateUserSettings(values))
 	}
 
 	const formik = useFormik({
@@ -79,8 +79,8 @@ const SettingsFields = ({ closeTab }) => {
 
 	// HANDLERS
 	const handlerCloseTab = () => {
-		dispatch(setErrorMessages([]));
-		dispatch(toggleEditMode(!isEditMode));
+		dispatch(actions.setErrorMessages([]));
+		dispatch(actions.toggleEditMode(!isEditMode));
 	}
 	const handlerChange = (e) => {
 		formik.handleChange(e);

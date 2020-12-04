@@ -1,6 +1,7 @@
-import Axios from "axios";
+import { ProfileType } from './../components/common/Types';
+import axios, { AxiosRequestConfig } from "axios";
 
-const instance = Axios.create({
+const instance = axios.create({
 	withCredentials: true,
 	baseURL: 'https://social-network.samuraijs.com/api/1.0/',
 	headers: {
@@ -17,65 +18,82 @@ export const usersAPI = {
 
 	},
 
-	async follow(userId) {
+	async follow(userId: number) {
 		const response = await instance.post(
 			`follow/${ userId }`,
 			{});
 		return response.data;
 	},
 
-	async unfollow(userId) {
+	async unfollow(userId: number) {
 		const response = await instance.delete(
 			`follow/${ userId }`,
 			{});
 		return response.data;
 	},
 
-	getProfile(userId) {
+	getProfile(userId: number) {
 		console.warn('Absolute method. Please use profileAPI object')
 		return profileAPI.getProfile(userId)
 	},
-
 }
 
 export const profileAPI = {
-	getProfile(userId) {
+	getProfile(userId: number) {
 		return instance.get(`profile/${ userId }`)
 	},
 
-	getStatus(userId) {
+	getStatus(userId: number) {
 		return instance.get(`profile/status/${ userId }`)
 	},
 
-	updateStatus(status) {
+	updateStatus(status: string) {
 		return instance.put(`profile/status`, { status })
 	},
 
-	saveAvatar(file, config) {
+	saveAvatar(file: File, config: AxiosRequestConfig) {
 		let formData = new FormData();
 		formData.append('image', file)
 		return instance.put(`profile/photo`, formData, config)
 	},
 
-	updateSettings(profile) {
+	updateSettings(profile: ProfileType) {
 		return instance.put(`profile`, profile)
 	},
 }
 
+export enum ResultCodesEnum {
+	Success = 0,
+	Error = 1,
+}
+export enum ResultCodesForCaptcha {
+	CaptchaIsRequired = 10
+}
 
+type LoginResponseType = {
+	data: {id: number}
+	resultCode: ResultCodesEnum | ResultCodesForCaptcha
+	messages: string
+}
+type MeResponseType = {
+	data: {id: number, email: string, login: string}
+	resultCode: ResultCodesEnum
+	messages: string[]
+}
 
 export const authAPI = {
-	me() {
-		return instance.get(`auth/me`)
+	async me() {
+		const res = await instance.get<MeResponseType>(`auth/me`);
+		return res.data;
 	},
 
-	login(email, password, rememberMe = false, captcha) {
-		return instance.post(`auth/login`, {
+	login(email: string, password: string, rememberMe = false, captcha: null | string = null) {
+		return instance.post<LoginResponseType>(`auth/login`, {
 			email, password, rememberMe, captcha
 		})
 	},
-
-	logout() {
+ 
+	logout() { 
 		return instance.delete(`auth/login`)
 	},
 	

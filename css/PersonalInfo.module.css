@@ -1,0 +1,256 @@
+.persInfo {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+@media only screen and (max-width: 600px) {
+  .persInfo {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+}
+
+.avatar {
+  margin-top: 20px;
+  margin-right: 50px;
+  margin-bottom: 20px;
+  width: 200px;
+  border-radius: 50%;
+  overflow: hidden;
+  position: relative;
+  border: 4px solid white;
+}
+
+.avatar:hover {
+  color: white;
+}
+
+.avatar:hover .input {
+  height: 50%;
+  -webkit-transition: 1s;
+  -o-transition: 1s;
+  transition: 1s;
+}
+
+.avatar img {
+  width: 100%;
+  cursor: pointer;
+}
+
+.avatar .input {
+  background: rgba(0, 0, 0, 0.5);
+  position: absolute;
+  height: 0%;
+  width: 100%;
+  bottom: 0;
+  -webkit-transition: 1s;
+  -o-transition: 1s;
+  transition: 1s;
+  cursor: pointer;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.avatar .input input {
+  display: none;
+}
+
+@media only screen and (max-width: 600px) {
+  .avatar {
+    width: 200px;
+    margin-right: 0;
+  }
+}
+
+.containerInfo {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  width: 30%;
+}
+
+@media only screen and (max-width: 600px) {
+  .containerInfo {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+.containerInfo h2 {
+  font-size: 25px;
+  margin-bottom: 30px;
+  color: #009999;
+  font-weight: bold;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+@media only screen and (max-width: 600px) {
+  .containerInfo h2 {
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .containerInfo h2 > div {
+    display: none;
+  }
+}
+
+.containerInfo li {
+  margin-bottom: 10px;
+  font-size: 16px;
+}
+
+.containerInfo .item {
+  font-weight: bold;
+  color: #797878;
+}
+
+.containerInfo .settings {
+  cursor: pointer;
+}
+
+.containerInfo .settings :hover {
+  color: rgba(25, 80, 80, 0.5);
+}
+
+.overlaySettingsField {
+  height: 50%;
+  width: 40%;
+  position: fixed;
+  color: white;
+  z-index: 1;
+  top: 25%;
+  left: 30%;
+  background-color: rgba(0, 0, 0, 0.7);
+  overflow-x: hidden;
+  -webkit-transition: 0.5s;
+  -o-transition: 0.5s;
+  transition: 0.5s;
+  padding: 10px 10px 20px 10px;
+  border: 5px solid darkslategrey;
+}
+
+@media only screen and (max-width: 1000px) {
+  .overlaySettingsField {
+    width: 70%;
+    top: 5%;
+    left: 15%;
+    height: 100%;
+    padding-bottom: 70px;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .overlaySettingsField {
+    width: 100%;
+    top: 0;
+    left: 0;
+    height: 100%;
+  }
+}
+
+.overlaySettingsField .closeTabContainer {
+  float: right;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.overlaySettingsField .closeTabContainer:hover {
+  background: rgba(226, 226, 226, 0.2);
+}
+
+.overlaySettingsField .overlayContent {
+  position: relative;
+  width: 100%;
+  text-align: center;
+  margin-top: 30px;
+}
+
+.overlaySettingsField .overlayContent > div {
+  padding: 10px 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  margin-right: 20px;
+  margin-left: 20px;
+}
+
+.overlaySettingsField .overlayContent > div label {
+  margin-bottom: 10px;
+}
+
+.overlaySettingsField .overlayContent > div input {
+  width: 100%;
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+  text-align: center;
+}
+
+.socLinks {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.socLinks div {
+  margin: 5px;
+}
+
+.socLinks a {
+  color: black;
+}
+
+.socLinks a :hover {
+  color: rgba(25, 80, 80, 0.5);
+}

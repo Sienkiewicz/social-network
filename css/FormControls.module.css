@@ -1,0 +1,41 @@
+.container {
+  padding-top: 20px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background-color: #fff;
+  text-align: center;
+}
+
+.error {
+  border: 1px solid red;
+}
+
+.formSummeryError {
+  padding: 5px;
+  color: red;
+}
+
+.field {
+  margin-bottom: 10px;
+  width: 150px;
+  line-height: 1.5;
+  margin-left: 5px;
+}
+
+.rememberMe {
+  margin: 5px;
+}
+
+button {
+  text-align: center;
+  padding: 0;
+  text-align-last: center;
+}
