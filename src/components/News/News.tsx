@@ -1,8 +1,8 @@
-import React from 'react'
+import React, { FC } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCoffee } from '@fortawesome/free-solid-svg-icons'
 
-const News = () => {
+const News: FC = () => {
 	return (
 		<div>
 		NEWS

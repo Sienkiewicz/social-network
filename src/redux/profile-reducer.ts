@@ -1,3 +1,4 @@
+import { ChangedSettingsType, PostType } from './../components/common/Types';
 import { AxiosRequestConfig } from 'axios';
 import { ThunkAction } from 'redux-thunk';
 
@@ -7,12 +8,6 @@ import { ProfileType } from '../components/common/Types';
 
 type ActionTypes = InferActionTypes<typeof actions>
 export type InitialStateProfileType = typeof initialState
-
-type PostType = {
-  id: number
-  post: string
-  count: number
-}
 
 let initialState = {
 	posts: [
@@ -143,17 +138,22 @@ export const savePhoto = (file: File, config: AxiosRequestConfig): ThunkAction<v
 	setTimeout(() => dispatch(actions.toggleFetchingAvatar(false)), 1000);
 }
 
-export const updateUserSettings = (settings: ProfileType): ThunkAction<void, InitialStateProfileType, null, ActionTypes> => async (dispatch, getState: any) => {
-	const userId = getState().auth.id;
-	const isEditMode = getState().profilePage.isEditMode;
-	dispatch(actions.setErrorMessages([]))
-	const response = await profileAPI.updateSettings(settings);
-	if (response.data.resultCode === 0) {
-		dispatch(getUserProfile(userId));
-		dispatch(actions.toggleEditMode(!isEditMode));
-	} else {
-		dispatch(actions.setErrorMessages(response.data.messages))
-	}
+export const updateUserSettings = (
+  settings: ChangedSettingsType
+): ThunkAction<void, InitialStateProfileType, null, ActionTypes> => async (
+  dispatch,
+  getState: any
+) => {
+  const userId = getState().auth.id
+  const isEditMode = getState().profilePage.isEditMode
+  dispatch(actions.setErrorMessages([]))
+  const response = await profileAPI.updateSettings(settings)
+  if (response.data.resultCode === 0) {
+    dispatch(getUserProfile(userId))
+    dispatch(actions.toggleEditMode(!isEditMode))
+  } else {
+    dispatch(actions.setErrorMessages(response.data.messages))
+  }
 }
 
 export default profileReducer;

@@ -1,4 +1,5 @@
 import { connect } from 'react-redux';
+import { AppStateType } from '../../../redux/redux-store';
 import MyPosts from './MyPosts';
 
 // const MyPosts = (props) => {
@@ -11,7 +12,7 @@ import MyPosts from './MyPosts';
 //   return <div>{postsElement}</div>;
 // };
 
-let mapStateToProps = (state) => {
+let mapStateToProps = (state:AppStateType) => {
   return {
     posts: state.profilePage.posts,
   };

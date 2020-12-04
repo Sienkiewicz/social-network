@@ -1,4 +1,4 @@
-import { ProfileType } from './../components/common/Types';
+import { ChangedSettingsType, ProfileType } from './../components/common/Types';
 import axios, { AxiosRequestConfig } from "axios";
 
 const instance = axios.create({
@@ -39,27 +39,27 @@ export const usersAPI = {
 }
 
 export const profileAPI = {
-	getProfile(userId: number) {
-		return instance.get(`profile/${ userId }`)
-	},
+  getProfile(userId: number) {
+    return instance.get(`profile/${userId}`)
+  },
 
-	getStatus(userId: number) {
-		return instance.get(`profile/status/${ userId }`)
-	},
+  getStatus(userId: number) {
+    return instance.get(`profile/status/${userId}`)
+  },
 
-	updateStatus(status: string) {
-		return instance.put(`profile/status`, { status })
-	},
+  updateStatus(status: string) {
+    return instance.put(`profile/status`, { status })
+  },
 
-	saveAvatar(file: File, config: AxiosRequestConfig) {
-		let formData = new FormData();
-		formData.append('image', file)
-		return instance.put(`profile/photo`, formData, config)
-	},
+  saveAvatar(file: File, config: AxiosRequestConfig) {
+    let formData = new FormData()
+    formData.append('image', file)
+    return instance.put(`profile/photo`, formData, config)
+  },
 
-	updateSettings(profile: ProfileType) {
-		return instance.put(`profile`, profile)
-	},
+  updateSettings(profile: ChangedSettingsType) {
+    return instance.put(`profile`, profile)
+  },
 }
 
 export enum ResultCodesEnum {

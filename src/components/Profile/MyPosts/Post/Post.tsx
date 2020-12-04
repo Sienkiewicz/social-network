@@ -1,7 +1,12 @@
-import React from 'react';
+import React, { FC } from 'react';
 import s from './Post.module.scss';
 
-const Post = (props) => {
+type Props = {
+  message: string
+  count: number
+}
+
+const Post: FC<Props> = (props) => {
   return (
     <div className={s.container}>
       <div className={s.post}>
