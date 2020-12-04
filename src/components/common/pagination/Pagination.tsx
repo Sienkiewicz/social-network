@@ -1,10 +1,18 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, FC } from 'react'
 import { getUsers } from '../../../redux/users-reducer';
 import { useDispatch } from 'react-redux';
 import s from './Pagination.module.scss';
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';
 
-const Pagination = (props) => {
+type Props = {
+    totalUsersCount: number
+    pageSize: number
+    currentPage: number
+
+    onPageChanged: (pageNr: number) => void
+}
+
+const Pagination: FC<Props> = (props) => {
 
 	const dispatch = useDispatch()
 	let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);

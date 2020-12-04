@@ -2,8 +2,18 @@ import React from 'react';
 import Header from './Header';
 import { connect } from 'react-redux';
 import { logout } from '../../redux/auth-reducer';
+import { AppStateType } from '../../redux/redux-store';
 
-class HeaderContainer extends React.Component {
+type Props = {
+    openSidebar: boolean
+    isAuth: boolean
+    login: string | null
+    logout: () => void
+    
+    setOpenSidebar: (openSidebar: boolean) => void
+}
+
+class HeaderContainer extends React.Component<Props> {
 
 
   render() {
@@ -11,7 +21,7 @@ class HeaderContainer extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: AppStateType) => ({
   isAuth: state.auth.isAuth,
   login: state.auth.login,
 });

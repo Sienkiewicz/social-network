@@ -2,7 +2,6 @@ import React from 'react'
 import s from './FormControls.module.scss'
 
 
-
 export const TextForm = ({ input, meta, typeField, ...props }) => {
 	let hasError = meta.touched && meta.error;
 	let Element = typeField

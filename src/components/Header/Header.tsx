@@ -1,8 +1,18 @@
-import React from 'react';
-import s from './Header.module.scss';
+import React, {FC} from 'react';
 import { NavLink } from 'react-router-dom';
+import s from './Header.module.scss';
 
-const Header = (props) => {
+
+type Props = {
+    openSidebar: boolean
+    isAuth: boolean
+    login: string | null
+    
+    logout: () => void
+    setOpenSidebar: (openSidebar: boolean) => void
+}
+
+const Header: FC<Props> = (props) => {
 	return (
 		<header className={`${s.header}`}>
 			<img

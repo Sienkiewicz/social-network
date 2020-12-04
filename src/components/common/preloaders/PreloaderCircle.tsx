@@ -1,7 +1,7 @@
-import React from 'react'
+import React, {FC} from 'react'
 import preloader from '../../../assets/loaders/giphy.gif';
 
-const Preloader = () => {
+const Preloader: FC = () => {
 	return (
 		<div className='circlePreloader'>
 			<img alt='' src={preloader} />
