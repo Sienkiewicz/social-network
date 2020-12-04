@@ -1,9 +1,13 @@
-import React from 'react';
+import React, { FC } from 'react';
 import s from './../Messages.module.scss';
 import { NavLink } from 'react-router-dom';
 
-// 1-я итерация - превращаем jsx в функцию
-const DialogItem = (props) => {
+type Props = {
+  id: number
+  imgUrl: string
+  name: string
+}
+const DialogItem: FC<Props> = (props) => {
 	let path = `/messages/${ props.id }`;
 
 	return (

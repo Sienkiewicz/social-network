@@ -70,7 +70,7 @@ export enum ResultCodesForCaptcha {
 	CaptchaIsRequired = 10
 }
 
-type LoginResponseType = {
+export type LoginResponseType = {
 	data: {id: number}
 	resultCode: ResultCodesEnum | ResultCodesForCaptcha
 	messages: string

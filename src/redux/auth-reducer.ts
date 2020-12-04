@@ -14,7 +14,7 @@ let initialState = {
 	isFetching: false,
 	isAuth: false,
 	captchaUrl: null as null | string,
-	error: '' as string,
+	error: [] as string[],
 }
 
 const authReducer = (state: InitialStateAuthType = initialState, action: ActionTypes):InitialStateAuthType => {
@@ -53,7 +53,7 @@ export const actions = {
 		({ type: 'SET_USER_DATA', payload: { id, email, login, isAuth } }as const),
 	setCaptchaUrl: (captchaUrl: string) => ({ type: 'SET_CAPTCHA_URL', payload: { captchaUrl } }as const),
 	toggleFetchingLogin: (isFetching: boolean) => ({ type: 'TOGGLE_FETCHING_LOGIN', payload: { isFetching } }as const),
-	addErrorMessages: (error: string) => ({ type: 'ADD_ERROR_MESSAGES', payload: { error } }as const),
+	addErrorMessages: (error: string[]) => ({ type: 'ADD_ERROR_MESSAGES', payload: { error } }as const),
 }
 
 export const getAuthUserData = (): ThunkAction<any, InitialStateAuthType, null, ActionTypes> => async (dispatch) => {
@@ -80,7 +80,7 @@ export const login = (email: string, password: string, rememberMe: boolean, capt
 			} else {
 				if (response.data.resultCode !== 0) {
 					dispatch(actions.toggleFetchingLogin(false))
-					dispatch(actions.addErrorMessages(response.data.messages));
+					dispatch(actions.addErrorMessages([response.data.messages]));
 				}
 			}
 		}
