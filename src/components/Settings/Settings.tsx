@@ -1,6 +1,6 @@
-import React from 'react'
+import React, { FC } from 'react'
 
-const Settings = () => {
+const Settings: FC = () => {
 	return (
 		<div>
 			Settings

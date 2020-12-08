@@ -34,7 +34,7 @@ export type ChangedSettingsType = {
 export type UserType = {
   name: string
   id: number
-  photos: File | PhotosType
+  photos: PhotosType
   status: null | string
   followed: boolean
 }

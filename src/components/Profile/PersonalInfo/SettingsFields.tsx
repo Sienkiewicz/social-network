@@ -28,7 +28,7 @@ const SettingsFields: FC = () => {
   const dispatch = useDispatch()
 
   // LOCAL STATE
-  const [error, setError] = useState([] as string[])
+  const [error, setError] = useState<string[]>([])
   const [doesShowErrorButtons, setDoesShowErrorButtons] = useState(false)
 
   useEffect((): void => {

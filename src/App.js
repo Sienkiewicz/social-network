@@ -11,7 +11,7 @@ import Navbar from './components/Navbar/Navbar';
 import HeaderContainer from './components/Header/HeaderContainer';
 import Login from './components/Login/Login';
 import { useSelector, useDispatch } from 'react-redux';
-import { initializeApp } from './redux//app-reducer';
+import { initializeApp } from './redux/app-reducer';
 import Preloader from './components/common/preloaders/Preloader';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBars, faCog } from '@fortawesome/free-solid-svg-icons'
