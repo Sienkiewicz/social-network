@@ -1,18 +1,10 @@
 import React, { FC } from 'react'
 import Pagination from '../common/pagination/Pagination'
+import { UserType } from '../common/Types'
 import User from './User'
 
 type Props = {
-  users: {
-    name: string
-    id: number
-    photos: {
-      small: null | string
-      large: null | string
-    }
-    status: null | string
-    followed: boolean
-  }[]
+  users: UserType[]
   followingInProgress: number[]
   currentPage: number
   pageSize: number

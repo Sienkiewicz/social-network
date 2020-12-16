@@ -114,7 +114,6 @@ const SettingsFields: FC = () => {
           typeOfField='text'
           handleChange={handlerChange}
           valueOfField={formik.values.fullName}
-          onBlur={formik.handleBlur}
           error={error}
           formik={formik}
         />
@@ -124,8 +123,6 @@ const SettingsFields: FC = () => {
           textOfLabelField='Are you looking for a job?'
           typeOfField='checkbox'
           handleChange={handlerChange}
-          valueOfField={formik.values.lookingForAJob}
-          onBlur={formik.handleBlur}
           error={error}
           formik={formik}
         />
@@ -136,7 +133,6 @@ const SettingsFields: FC = () => {
           typeOfField='input'
           handleChange={handlerChange}
           valueOfField={formik.values.lookingForAJobDescription}
-          onBlur={formik.handleBlur}
           error={error}
           formik={formik}
         />
@@ -147,7 +143,6 @@ const SettingsFields: FC = () => {
           typeOfField='input'
           handleChange={handlerChange}
           valueOfField={formik.values.aboutMe}
-          onBlur={formik.handleBlur}
           error={error}
           formik={formik}
         />
@@ -162,7 +157,6 @@ const SettingsFields: FC = () => {
                 typeOfField='input'
                 handleChange={handlerChange}
                 valueOfField={formik.values.contacts[key]}
-                onBlur={formik.handleBlur}
                 error={error}
                 formik={formik}
               />

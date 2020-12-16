@@ -2,32 +2,10 @@ import React, { FC } from 'react'
 import DialogItem from './DialogItem/DialogItem'
 import Message from './Message/Message'
 import s from './Messages.module.scss'
-import { useSelector, useDispatch } from 'react-redux'
-import { actions } from '../../redux/messages-reducer'
+import { useSelector } from 'react-redux'
 import { withAuthRedirect } from '../hoc/withAuthRedirect'
-import { Formik, Field, Form } from 'formik'
 import { AppStateType } from '../../redux/redux-store'
-
-const SignupForm: FC<{}> = () => {
-  const dispatch = useDispatch()
-
-  return (
-    <Formik
-      initialValues={{ message: '' }}
-      onSubmit={(values, onSubmitProps) => {
-        dispatch(actions.addMessageActionCreator(values.message))
-        onSubmitProps.resetForm()
-      }}
-    >
-      <Form>
-        <div>
-          <Field name='message' as='textarea' className='form-input' />
-        </div>
-        <button type='submit'>Submit</button>
-      </Form>
-    </Formik>
-  )
-}
+import { AddMessageForm } from './AddMessageForm'
 
 const Messages: FC = () => {
   const state = useSelector((state: AppStateType) => state.messagesPage)
@@ -37,7 +15,7 @@ const Messages: FC = () => {
   ))
 
   let messagesElements = state.messages.map((m) => (
-    <Message message={m.message} key={m.id} id={m.id} />
+    <Message message={m.message} key={m.id} />
   ))
 
   return (
@@ -46,7 +24,7 @@ const Messages: FC = () => {
       <div className={s.messages}>
         {messagesElements}
         <div>
-          <SignupForm />
+          <AddMessageForm />
         </div>
       </div>
     </div>

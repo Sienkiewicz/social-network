@@ -8,22 +8,14 @@ import {
 import Users from './Users';
 import Preloader from '../common/preloaders/Preloader';
 import { AppStateType } from '../../redux/redux-store';
+import { UserType } from '../common/Types';
 
 type MapStatePropsType = {
   currentPage: number
   pageSize: number
   isFetching: boolean
   totalUsersCount: number
-  users: {
-    name: string
-    id: number
-    photos: {
-      small: null | string
-      large: null | string
-    }
-    status: null | string
-    followed: boolean
-  }[]
+  users: UserType[]
   followingInProgress: number[]
 }
 

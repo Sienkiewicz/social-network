@@ -2,18 +2,10 @@ import React, { FC } from 'react'
 import s from './Users.module.scss'
 import { NavLink } from 'react-router-dom'
 import userPhoto from '../../assets/icons/icon_developer.jpg'
+import { UserType } from '../common/Types'
 
 type Props = {
-  user: {
-    name: string
-    id: number
-    photos: {
-      small: null | string
-      large: null | string
-    }
-    status: null | string
-    followed: boolean
-  }
+  user: UserType
   followingInProgress: number[]
 
   unfollow: (userId: number) => void

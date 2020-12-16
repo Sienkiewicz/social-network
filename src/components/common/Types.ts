@@ -11,8 +11,8 @@ export type ContactsType = {
 }
 
 export type PhotosType = {
-  small: null | string | File
-  large: null | string | File
+  small: null | string 
+  large: null | string
 }
 export type ProfileType = {
   userId: number
@@ -32,6 +32,7 @@ export type ChangedSettingsType = {
 }
 
 export type UserType = {
+  [key: string]: any
   name: string
   id: number
   photos: PhotosType

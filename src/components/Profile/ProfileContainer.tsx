@@ -18,7 +18,7 @@ import { AxiosRequestConfig } from 'axios'
 import { AppStateType } from '../../redux/redux-store'
 
 type Props = {
-  userId: number
+  userId?: number
   isAvatarFetching: boolean
   isEditMode: boolean
   profile: ProfileType | null
