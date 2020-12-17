@@ -1,4 +1,5 @@
-import { createStore, combineReducers, applyMiddleware } from "redux"
+import { ThunkAction } from 'redux-thunk';
+import { createStore, combineReducers, applyMiddleware, Action } from "redux"
 import profileReducer from "./profile-reducer"
 import messagesReducer from "./messages-reducer"
 import sidebarReducer from "./sidebar-reducer"
@@ -20,8 +21,8 @@ let reducers = combineReducers({
 
 export type AppStateType = ReturnType<typeof reducers>
 
-type PropertiesTypes<T> = T extends {[key: string] : infer U} ? U : never
-export type InferActionTypes<T extends {[key: string]: (...args: any[]) => any} > = ReturnType<PropertiesTypes<T>>
+export type InferActionTypes<T> = T extends {[key: string]: (...args: any[]) => infer U} ? U : never
+export type BaseTThunk<A extends Action, R=Promise<void>> = ThunkAction<R, AppStateType, null, A>
 
 let store = createStore(reducers, applyMiddleware(thunkMiddleware));
 // @ts-ignore
