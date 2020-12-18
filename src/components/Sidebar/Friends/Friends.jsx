@@ -2,7 +2,7 @@ import React from 'react';
 import s from './Friends.module.scss';
 import AvatarItem from './AvatarItem/AvatarItem';
 
-const Friends = (props) => {
+const Friends = () => {
   let users = [
     {
       id: '1',
