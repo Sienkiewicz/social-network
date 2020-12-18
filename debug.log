@@ -15,3 +15,4 @@
 [1214/175059.097:ERROR:filesystem_win.cc(129)] GetFileAttributes C:\Users\peter\AppData\Local\Google\Chrome\User Data\Crashpad\attachments\d616aae3-9069-4268-a15a-fb48651264b3: Системе не удается найти указанный путь. (0x3)
 [1214/175059.098:ERROR:filesystem_win.cc(129)] GetFileAttributes C:\Users\peter\AppData\Local\Google\Chrome\User Data\Crashpad\attachments\2abe9c42-fe9e-4b71-9062-504a39f3b53e: Системе не удается найти указанный путь. (0x3)
 [1214/175059.099:ERROR:filesystem_win.cc(129)] GetFileAttributes C:\Users\peter\AppData\Local\Google\Chrome\User Data\Crashpad\attachments\b05ccd57-0da1-4905-8832-7a76f73492c9: Системе не удается найти указанный путь. (0x3)
+[1216/221750.221:ERROR:directory_reader_win.cc(43)] FindFirstFile: Системе не удается найти указанный путь. (0x3)
