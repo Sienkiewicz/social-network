@@ -1,4 +1,5 @@
-import { InferActionTypes, BaseTThunk } from './redux-store';
+import { APIResponseType } from './../api/api'
+import { InferActionTypes, BaseTThunk } from './redux-store'
 import { UserType } from './../components/common/Types'
 import { usersAPI } from '../api/usersAPI'
 import { updateObjInArray } from '../utils/object-helpers'
@@ -97,11 +98,11 @@ export const getUsers = (currentPage: number, pageSize: number): TThunk => {
 const followUnfollowFlow = async (
   dispatch: TDispatch,
   userId: number,
-  apiMethod: any,
+  apiMethod: (userId: number) => Promise<APIResponseType>,
   actionCreator: (userId: number) => ActionTypes
 ) => {
   dispatch(actionsOfUsers.toggleFollowingProgress(true, userId))
-  const data = await apiMethod
+  const data = await apiMethod(userId)
   if (data.resultCode === 0) {
     dispatch(actionCreator(userId))
   }
@@ -110,10 +111,10 @@ const followUnfollowFlow = async (
 export const unfollow = (userId: number): TThunk => {
   return async (dispatch) => {
     const unfollowSuccess = actionsOfUsers.unfollowSuccess
-    followUnfollowFlow(
+    await followUnfollowFlow(
       dispatch,
       userId,
-      usersAPI.unfollow(userId),
+      usersAPI.unfollow,
       unfollowSuccess
     )
   }
@@ -121,7 +122,7 @@ export const unfollow = (userId: number): TThunk => {
 export const follow = (userId: number): TThunk => {
   return async (dispatch) => {
     const followSuccess = actionsOfUsers.followSuccess
-    followUnfollowFlow(dispatch, userId, usersAPI.follow(userId), followSuccess)
+    await followUnfollowFlow(dispatch, userId, usersAPI.follow, followSuccess)
   }
 }
 export default usersReducer

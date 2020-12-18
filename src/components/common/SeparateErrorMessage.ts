@@ -1,5 +1,5 @@
 
-export const separateErrorMessage = (error: string[], nameOfErrorField: string) => {
+export const separateErrorMessage = (error: string[], nameOfErrorField: string): string | undefined => {
 	let errorField = nameOfErrorField.toUpperCase();
 	if (error !== undefined) {
 		let message = error.find(m => m.toUpperCase().includes(errorField))

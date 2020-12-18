@@ -13,29 +13,24 @@ import { compose } from 'redux'
 import MyPostsContainer from './MyPosts/MyPostsContainer'
 import Preloader from '../common/preloaders/Preloader'
 import PostArea from './PostArea/PostArea'
-import { ProfileType } from '../common/Types'
-import { AxiosRequestConfig } from 'axios'
 import { AppStateType } from '../../redux/redux-store'
 
-type Props = {
-  userId?: number
-  isAvatarFetching: boolean
-  isEditMode: boolean
-  profile: ProfileType | null
-  authId: number | null
-  status: string
-  isFetching: boolean
+type MapStatePropsType = ReturnType<typeof mapStateToProps>
 
-  savePhoto: (file: File, config: AxiosRequestConfig) => void
-  toggleEditMode: (isEditMode: boolean) => void
+type MapDispatchPropsType = {
+  getUserProfile: (userId: number) => void
+  getUserStatus: (userId: number) => void
   updateUserStatus: (status: string) => void
+  savePhoto: (file: File) => void
+  toggleEditMode: () => void
 }
 
 type MatchParamsType = {
   userId: string | undefined
 }
 
-const ProfileContainer: FC<Props> = (props) => {
+type PropsType = MapStatePropsType & MapDispatchPropsType
+const ProfileContainer: FC<PropsType> = (props) => {
   let match = useRouteMatch<MatchParamsType>('/profile/:userId?')
   const dispatch = useDispatch()
 
@@ -49,16 +44,18 @@ const ProfileContainer: FC<Props> = (props) => {
     if (userId !== null) {
       dispatch(getUserProfile(userId))
       dispatch(getUserStatus(userId))
+    } else {
+      console.log('Id should exists in URI params or in state')
     }
   }, [userId])
 
   // redirect to login
   if (!props.authId) {
-    if(!userId) {
+    if (!userId) {
       return <Redirect to={'/login'} />
-      }
+    }
   }
-  
+
   return (
     <>
       {props.isFetching ? <Preloader /> : null}
@@ -67,7 +64,7 @@ const ProfileContainer: FC<Props> = (props) => {
           {...props}
           isAvatarFetching={props.isAvatarFetching}
           profile={props.profile}
-          status={props.status} 
+          status={props.status}
           updateUserStatus={props.updateUserStatus}
           userId={userId}
           savePhoto={props.savePhoto}
@@ -90,7 +87,7 @@ let mapStateToProps = (state: AppStateType) => ({
   isEditMode: state.profilePage.isEditMode,
 })
 
-export default compose(
+export default compose<React.ComponentType>(
   connect(mapStateToProps, {
     getUserProfile,
     getUserStatus,

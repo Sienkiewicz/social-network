@@ -102,8 +102,7 @@ type MatchParamsType = {
       </div>
       <div className='bottomNavBar'>
         {match === null &&
-          matchProfile !== null &&
-          matchProfile.params.userId !== undefined &&
+          matchProfile?.params.userId !== undefined &&
           userId === +matchProfile.params.userId && (
             <FontAwesomeIcon
               className='bottomNavBar__iconSettings fa-2x'

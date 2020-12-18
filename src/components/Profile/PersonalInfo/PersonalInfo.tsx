@@ -10,13 +10,14 @@ import SocLinks from './SocLinks'
 import { AxiosRequestConfig } from 'axios'
 
 type PropsType = {
-	savePhoto: (file: File, config: AxiosRequestConfig) => void
-	toggleEditMode: (isEditMode: boolean) => void
-	userId: number
+  userId: number
 	profile: any
 	authId: number | null
 	isAvatarFetching: boolean
-	isEditMode: boolean
+  isEditMode: boolean
+  
+	savePhoto: (file: File, config: AxiosRequestConfig) => void
+	toggleEditMode: (isEditMode: boolean) => void
 }
 
 type TState = {

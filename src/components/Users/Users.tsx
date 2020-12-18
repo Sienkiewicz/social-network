@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React, { FC, useEffect } from 'react'
 import Pagination from '../common/pagination/Pagination'
 import { UserType } from '../common/Types'
 import User from './User'
@@ -11,14 +11,16 @@ type Props = {
   totalUsersCount: number
 
   onPageChanged: (pageNr: number) => void
-
   unfollow: (userId: number) => void
   follow: (userId: number) => void
 }
 
 let Users: FC<Props> = (props) => {
+    useEffect(() => {
+      window.scrollTo(0, 0)
+    }, [props.users])
   return (
-    <div>
+    <>
       {props.users.map((u) => (
         <User
           key={u.id}
@@ -34,7 +36,7 @@ let Users: FC<Props> = (props) => {
         onPageChanged={props.onPageChanged}
         currentPage={props.currentPage}
       />
-    </div>
+    </>
   )
 }
 
