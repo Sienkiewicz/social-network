@@ -18,7 +18,6 @@ type Props = {
 }
 
 const Profile: FC<Props> = (props) => {
-	
 	return (
 		<div>
 			<PersonalInfo

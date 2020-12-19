@@ -8,22 +8,7 @@ import {
 import Users from './Users';
 import Preloader from '../common/preloaders/Preloader';
 import { AppStateType } from '../../redux/redux-store';
-import { UserType } from '../common/Types';
-
-type MapStatePropsType = {
-  currentPage: number
-  pageSize: number
-  isFetching: boolean
-  totalUsersCount: number
-  users: UserType[]
-  followingInProgress: number[]
-}
-
-type MapDispatchPropsType = {
-  getUsers: (currentPage: number, pageSize: number) => void
-  unfollow: (userId: number) => void
-  follow: (userId: number) => void
-}
+import { UserType } from '../common/Types'
 
 class UsersAPIComponent extends React.Component<
   MapDispatchPropsType & MapStatePropsType
@@ -76,3 +61,18 @@ export default UsersContainer;
 
 // * от костанты до экспорт дэфолт можно записать одной строкой
 // ? export default connect((mapStateToProps, mapDispatchToProps)(Users)
+
+type MapStatePropsType = {
+  currentPage: number
+  pageSize: number
+  isFetching: boolean
+  totalUsersCount: number
+  users: UserType[]
+  followingInProgress: number[]
+}
+
+type MapDispatchPropsType = {
+  getUsers: (currentPage: number, pageSize: number) => void
+  unfollow: (userId: number) => void
+  follow: (userId: number) => void
+}
