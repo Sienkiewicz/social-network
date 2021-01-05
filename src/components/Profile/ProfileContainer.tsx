@@ -1,6 +1,6 @@
 import React, { FC, useEffect } from 'react'
 import Profile from './Profile'
-import { connect, useDispatch } from 'react-redux'
+import { connect, useDispatch, useSelector } from 'react-redux'
 import {
   actions,
   getUserProfile,
@@ -15,21 +15,6 @@ import Preloader from '../common/preloaders/Preloader'
 import PostArea from './PostArea/PostArea'
 import { AppStateType } from '../../redux/redux-store'
 
-type MapStatePropsType = ReturnType<typeof mapStateToProps>
-
-type MapDispatchPropsType = {
-  getUserProfile: (userId: number) => void
-  getUserStatus: (userId: number) => void
-  updateUserStatus: (status: string) => void
-  savePhoto: (file: File) => void
-  toggleEditMode: () => void
-}
-
-type MatchParamsType = {
-  userId: string | undefined
-}
-
-type PropsType = MapStatePropsType & MapDispatchPropsType
 const ProfileContainer: FC<PropsType> = (props) => {
   let match = useRouteMatch<MatchParamsType>('/profile/:userId?')
   const dispatch = useDispatch()
@@ -71,7 +56,7 @@ const ProfileContainer: FC<PropsType> = (props) => {
         />
       )}
 
-      {match && !match.params.userId && <PostArea />}
+      {match?.params.userId && props.authId === +match.params.userId && <PostArea />}
       <MyPostsContainer />
     </>
   )
@@ -96,3 +81,19 @@ export default compose<React.ComponentType>(
     toggleEditMode: actions.toggleEditMode,
   })
 )(ProfileContainer)
+
+type MapStatePropsType = ReturnType<typeof mapStateToProps>
+
+type MapDispatchPropsType = {
+  getUserProfile: (userId: number) => void
+  getUserStatus: (userId: number) => void
+  updateUserStatus: (status: string) => void
+  savePhoto: (file: File) => void
+  toggleEditMode: () => void
+}
+
+type MatchParamsType = {
+  userId: string | undefined
+}
+
+type PropsType = MapStatePropsType & MapDispatchPropsType

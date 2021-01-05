@@ -1,6 +1,4 @@
-import React, { useState, useEffect, FC } from 'react'
-import { getUsers } from '../../../redux/users-reducer'
-import { useDispatch } from 'react-redux'
+import React, { useState, FC, memo, useEffect } from 'react'
 import s from './Pagination.module.scss'
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa'
 
@@ -12,8 +10,8 @@ type Props = {
   onPageChanged: (pageNr: number) => void
 }
 
-const Pagination: FC<Props> = (props) => {
-  const dispatch = useDispatch()
+const Pagination: FC<Props> = memo((props) => {
+  const [count, setCount] = useState(1)
   let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize)
 
   let pages = []
@@ -21,20 +19,20 @@ const Pagination: FC<Props> = (props) => {
     pages.push(i)
   }
 
-  let amountOfPages = 10
-
-  const [count, setCount] = useState(0)
-  let countMax = count + amountOfPages
-
-  let visiblePages = pages.filter((p) => p > count && p <= countMax)
-
+  let visiblePages = pages.filter((p) => p >= count && p <= count + 9)
   useEffect(() => {
-    dispatch(getUsers(count + 1, props.pageSize))
-  }, [count, dispatch, props.pageSize])
+    setCount(Math.floor(props.currentPage / 10)*10 + 1 )
+  }, [props.currentPage])
+
   return (
     <div className={s.paginator}>
       {count >= 10 && (
-        <div className={s.arrow} onClick={() => setCount(count - 10)}>
+        <div
+          className={s.arrow}
+          onClick={() => {
+            props.onPageChanged(count - 10)
+          }}
+        >
           <FaArrowLeft />
         </div>
       )}
@@ -54,12 +52,17 @@ const Pagination: FC<Props> = (props) => {
         )
       })}
       {count < Math.floor(pagesCount / 10) * 10 && (
-        <div className={s.arrow} onClick={() => setCount(count + 10)}>
+        <div
+          className={s.arrow}
+          onClick={() => {
+            props.onPageChanged(count + 10)
+          }}
+        >
           <FaArrowRight />
         </div>
       )}
     </div>
   )
-}
+})
 
 export default Pagination

@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React, { FC, memo } from 'react'
 import s from './Users.module.scss'
 import { NavLink } from 'react-router-dom'
 import userPhoto from '../../assets/icons/icon_developer.jpg'
@@ -12,7 +12,7 @@ type Props = {
   follow: (userId: number) => void
 }
 
-const User: FC<Props> = (props) => {
+const User: FC<Props> = memo((props) => {
   return (
     <div className={s.wrapper}>
       <NavLink to={`/profile/${props.user.id}`}>
@@ -60,6 +60,6 @@ const User: FC<Props> = (props) => {
       </div>
     </div>
   )
-}
+})
 
 export default User
