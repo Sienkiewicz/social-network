@@ -20,3 +20,4 @@
 [1221/121557.383:ERROR:directory_reader_win.cc(43)] FindFirstFile: Системе не удается найти указанный путь. (0x3)
 [1222/122509.049:ERROR:filesystem_win.cc(129)] GetFileAttributes C:\Users\peter\AppData\Local\Google\Chrome\User Data\Crashpad\attachments\6544c03c-81e1-404a-83d2-3166bcf2a672: Системе не удается найти указанный путь. (0x3)
 [1224/163948.231:ERROR:directory_reader_win.cc(43)] FindFirstFile: Системе не удается найти указанный путь. (0x3)
+[0105/112234.147:ERROR:directory_reader_win.cc(43)] FindFirstFile: Системе не удается найти указанный путь. (0x3)
