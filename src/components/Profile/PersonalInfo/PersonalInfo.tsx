@@ -8,22 +8,6 @@ import AboutMe from './AboutMe'
 import SettingsFields from './SettingsFields'
 import SocLinks from './SocLinks'
 import { AxiosRequestConfig } from 'axios'
-
-type PropsType = {
-  userId: number
-	profile: any
-	authId: number | null
-	isAvatarFetching: boolean
-  isEditMode: boolean
-  
-	savePhoto: (file: File, config: AxiosRequestConfig) => void
-	toggleEditMode: (isEditMode: boolean) => void
-}
-
-type TState = {
-  uploadPercentage: number
-  editMode: boolean
-}
 class PersonalInfo extends React.Component<PropsType, TState> {
   fileInput?: any
   state = {
@@ -48,19 +32,19 @@ class PersonalInfo extends React.Component<PropsType, TState> {
     }
   }
 
+  myStyleDivPercentage: CSSProperties = {
+    background: 'rgba(0,153,153, 0.7)',
+    position: 'absolute',
+    height: `${this.state.uploadPercentage}%`,
+    width: '100%',
+    bottom: '0',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    transition: '0.2s',
+    color: 'white',
+  }
   render() {
-    const myStyleDivPercentage: CSSProperties = {
-      background: 'rgba(0,153,153, 0.7)',
-      position: 'absolute',
-      height: `${this.state.uploadPercentage}%`,
-      width: '100%',
-      bottom: '0',
-      display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'center',
-      transition: '0.2s',
-      color: 'white',
-    }
 
     if (!this.props.profile) {
       return <Preloader />
@@ -86,7 +70,7 @@ class PersonalInfo extends React.Component<PropsType, TState> {
               </div>
             )}
             {this.props.isAvatarFetching && (
-              <div style={myStyleDivPercentage}>
+              <div style={this.myStyleDivPercentage}>
                 `{this.state.uploadPercentage}%`
               </div>
             )}
@@ -118,3 +102,19 @@ class PersonalInfo extends React.Component<PropsType, TState> {
 }
 
 export default PersonalInfo;
+
+type PropsType = {
+  userId: number
+  profile: any
+  authId: number | null
+  isAvatarFetching: boolean
+  isEditMode: boolean
+
+  savePhoto: (file: File, config: AxiosRequestConfig) => void
+  toggleEditMode: (isEditMode: boolean) => void
+}
+
+type TState = {
+  uploadPercentage: number
+  editMode: boolean
+}

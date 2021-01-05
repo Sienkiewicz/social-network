@@ -12,52 +12,62 @@ let initialState = {
   currentPage: 1,
   isFetching: false,
   followingInProgress: [] as number[], //array of users ids
+  filter: {
+    term: '',
+    friend: null as null | boolean
+  }
 }
 
 const usersReducer = (
-  state: InitialStateUsersType = initialState,
+  state = initialState,
   action: ActionTypes
-) => {
+): InitialStateUsersType => {
   switch (action.type) {
-    case 'FOLLOW':
+    case 'SM/USERS/FOLLOW':
       return {
         ...state,
         users: updateObjInArray(state.users, 'id', action.userId, {
           followed: true,
         }),
       }
-    case 'UNFOLLOW':
+    case 'SM/USERS/UNFOLLOW':
       return {
         ...state,
         users: updateObjInArray(state.users, 'id', action.userId, {
           followed: false,
         }),
       }
-    case 'SET_USERS':
+    case 'SM/USERS/SET_USERS':
       return {
         ...state,
         users: action.users,
       }
 
-    case 'SET_CURRENT_PAGE':
+      case 'SM/USERS/SET_FILTER':
+        return {
+          ...state,
+          filter: action.payload
+        }
+
+    case 'SM/USERS/SET_CURRENT_PAGE':
       return {
         ...state,
         currentPage: action.currentPage,
       }
 
-    case 'SET_TOTAL_USERS_COUNT':
+    case 'SM/USERS/SET_TOTAL_USERS_COUNT':
       return {
         ...state,
         totalUsersCount: action.totalUsersCount,
       }
 
-    case 'TOGGLE_IS_FETCHING':
+    case 'SM/USERS/TOGGLE_IS_FETCHING':
       return {
         ...state,
         isFetching: action.isFetching,
       }
 
-    case 'TOGGLE_IS_FOLLOWING_PROGRESS':
+    case 'SM/USERS/TOGGLE_IS_FOLLOWING_PROGRESS':
       return {
         ...state,
         followingInProgress: action.isFetching
@@ -71,24 +81,26 @@ const usersReducer = (
 }
 
 export const actionsOfUsers = {
-  followSuccess: (userId: number) => ({ type: 'FOLLOW', userId } as const),
-  unfollowSuccess: (userId: number) => ({ type: 'UNFOLLOW', userId } as const),
-  setUsers: (users: UserType[]) => ({ type: 'SET_USERS', users } as const),
+  followSuccess: (userId: number) => ({ type: 'SM/USERS/FOLLOW', userId } as const),
+  unfollowSuccess: (userId: number) => ({ type: 'SM/USERS/UNFOLLOW', userId } as const),
+  setUsers: (users: UserType[]) => ({ type: 'SM/USERS/SET_USERS', users } as const),
+  setFilter: (filter: FilterType) => ({ type: 'SM/USERS/SET_FILTER', payload: filter } as const),
   setCurrentPage: (currentPage: number) =>
-    ({ type: 'SET_CURRENT_PAGE', currentPage } as const),
+    ({ type: 'SM/USERS/SET_CURRENT_PAGE', currentPage } as const),
   setTotalUsersCount: (totalUsersCount: number) =>
-    ({ type: 'SET_TOTAL_USERS_COUNT', totalUsersCount } as const),
+    ({ type: 'SM/USERS/SET_TOTAL_USERS_COUNT', totalUsersCount } as const),
   toggleIsFetching: (isFetching: boolean) =>
-    ({ type: 'TOGGLE_IS_FETCHING', isFetching } as const),
+    ({ type: 'SM/USERS/TOGGLE_IS_FETCHING', isFetching } as const),
   toggleFollowingProgress: (isFetching: boolean, userId: number) =>
-    ({ type: 'TOGGLE_IS_FOLLOWING_PROGRESS', isFetching, userId } as const),
+    ({ type: 'SM/USERS/TOGGLE_IS_FOLLOWING_PROGRESS', isFetching, userId } as const),
 }
 
-export const getUsers = (currentPage: number, pageSize: number): TThunk => {
+export const getUsers = (currentPage: number, pageSize: number, filter: FilterType): TThunk => {
   return async (dispatch) => {
     dispatch(actionsOfUsers.setCurrentPage(currentPage))
     dispatch(actionsOfUsers.toggleIsFetching(true))
-    const data = await usersAPI.getUsers(currentPage, pageSize)
+    dispatch(actionsOfUsers.setFilter(filter))
+    const data = await usersAPI.getUsers(currentPage, pageSize, filter.term, filter.friend)
     dispatch(actionsOfUsers.toggleIsFetching(false))
     dispatch(actionsOfUsers.setUsers(data.items))
     dispatch(actionsOfUsers.setTotalUsersCount(data.totalCount))
@@ -128,6 +140,7 @@ export const follow = (userId: number): TThunk => {
 export default usersReducer
 
 export type InitialStateUsersType = typeof initialState
+export type FilterType = typeof initialState.filter
 type ActionTypes = InferActionTypes<typeof actionsOfUsers>
 type TThunk = BaseTThunk<ActionTypes>
 type TDispatch = Dispatch<ActionTypes>
